@@ -152,21 +152,34 @@ public class Main {
 
     public static void showList(ArrayList<Person> list, Scanner scanner, int type) throws Exception {
 
-        int counter = 1;
+        int index = 1;
 
         if (!list.isEmpty()) {
 
             for (Person item : list) {
 
-                System.out.print(counter + ". ");
-                System.out.println(item);
-                counter++;
+                if (item instanceof Student){
+
+                    System.out.println(index + ". Aluno: " + item.getName() + "\n");
+                    System.out.println(item);
+
+                }
+
+                else{
+
+                    System.out.println(index + ". Pessoa: " + item.getName() + "\n");
+                    System.out.println(item);
+
+                }
+
+                System.out.println();
+                index++;
 
             }
 
             if (type == 0) {
 
-                System.out.print("\nInsira qualquer valor para encerrar a exibição de pessoas e alunos: ");
+                System.out.print("Insira qualquer valor para encerrar a exibição de pessoas e alunos: ");
                 scanner.nextLine();
 
             }
@@ -258,18 +271,18 @@ public class Main {
 
         };
 
-        for (int i = 0; i <= 4; i++) {
+        for (int index = 0; index <= 4; index++) {
 
-            System.out.print(text_1[i]);
+            System.out.print(text_1[index]);
             answer = scanner.nextLine();
 
             if (auxiliary_alter(answer) == true) {
 
-                switch (i) {
+                switch (index) {
 
                     case 0:
 
-                        System.out.print(text_2[i]);
+                        System.out.print(text_2[index]);
                         name = scanner.nextLine();
                         item.setName(name);
 
@@ -277,7 +290,7 @@ public class Main {
 
                     case 1:
 
-                        System.out.print(text_2[i]);
+                        System.out.print(text_2[index]);
                         phone_number = scanner.nextLine();
                         item.setPhoneNumber(phone_number);
 
@@ -285,7 +298,7 @@ public class Main {
 
                     case 2:
 
-                        System.out.print(text_2[i]);
+                        System.out.print(text_2[index]);
                         birth_date = scanner.nextLine();
                         item.setBirthDate(birth_date);
 
@@ -293,7 +306,7 @@ public class Main {
 
                     case 3:
 
-                        System.out.print(text_2[i]);
+                        System.out.print(text_2[index]);
                         registration_date = scanner.nextLine();
                         item.setRegistrationDate(registration_date);
 
@@ -301,7 +314,7 @@ public class Main {
 
                     case 4:
 
-                        System.out.print(text_2[i]);
+                        System.out.print(text_2[index]);
                         last_update_date = scanner.nextLine();
                         item.setLastUpdateDate(last_update_date);
 
@@ -325,6 +338,7 @@ public class Main {
                 ((Student) item).setFinalGrade(final_grade);
 
             }
+            
         }
 
     }

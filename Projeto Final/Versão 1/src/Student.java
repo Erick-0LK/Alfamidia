@@ -84,7 +84,14 @@ public class Student extends Person{
     @Override
     public String toString() {
 
-        return super.toString() + ", " + this.final_grade;
+        String information = "Nome: " + this.name + "\n" +
+                             "Número de telefone: " + this.phone_number + "\n" +
+                             "Data de nascimento: " + this.birth_date + "\n" +
+                             "Data de cadastro: " + this.registration_date + "\n" +
+                             "Última data de alteração: " + this.last_update_date + "\n" +
+                             "Nota final do curso: " + this.final_grade;
+
+        return information;
 
     }
 

@@ -78,8 +78,14 @@ public class Person {
 
     public String toString() {
 
-        return this.name + ", " + this.phone_number + ", " + this.birth_date + ", " + this.registration_date + ", " + this.last_update_date;
+        String information = "Nome: " + this.name + "\n" +
+                             "Número de telefone: " + this.phone_number + "\n" +
+                             "Data de nascimento: " + this.birth_date + "\n" +
+                             "Data de cadastro: " + this.registration_date + "\n" +
+                             "Última data de alteração: " + this.last_update_date;
 
+        return information;
+        
     }
 
 }
