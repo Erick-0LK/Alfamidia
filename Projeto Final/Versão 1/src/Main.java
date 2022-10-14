@@ -1,6 +1,7 @@
-// Alfamídia - Projeto Final Versão 1
+// +PraTi/Alfamídia - Projeto Final Versão 1
 // Erick Larratéa Knoblich
-// A primeira versão utiliza dois Array Lists e usa o Scanner para cada 'input' do usuário.
+
+// A primeira versão utiliza o Scanner para cada 'input' do usuário.
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -16,8 +17,7 @@ public class Main {
         boolean end_application = false;
         String user_input;
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Person> list_of_people = new ArrayList<>();
-        ArrayList<Student> list_of_students = new ArrayList<>();
+        ArrayList<Person> list = new ArrayList<>();
 
         while (end_application == false) {
 
@@ -31,22 +31,22 @@ public class Main {
 
                 case "1":
 
-                    addInformation(list_of_people, list_of_students, scanner);
+                    addInformation(list, scanner);
                     break;
 
                 case "2":
 
-                    showList(list_of_people, list_of_students, scanner, 0);
+                    showList(list, scanner, 0);
                     break;
 
                 case "3":
 
-                    alterList(list_of_people, list_of_students, scanner);
+                    alterList(list, scanner);
                     break;
 
                 case "4":
 
-                    deleteInformation(list_of_people, list_of_students, scanner);
+                    deleteInformation(list, scanner);
                     break;
 
                 case "5":
@@ -56,7 +56,7 @@ public class Main {
 
                 default:
 
-                    System.out.print("\nResposta inválida. ");
+                    System.out.print("Resposta inválida. ");
                     Thread.sleep(3000);
 
             }
@@ -74,19 +74,19 @@ public class Main {
 
         System.out.print(
 
-            "CURSO DE JAVA - PROJETO FINAL\n\n"
-            +
-            "1. Criar pessoa ou aluno.\n"
-            +
-            "2. Mostrar pessoas e alunos criados.\n"
-            +
-            "3. Atualizar pessoa ou aluno.\n"
-            +
-            "4. Deletar uma pessoa ou aluno.\n"
-            +
-            "5. Encerrar programa.\n\n"
-            +
-            "Insira sua opção: "
+                "+PraTi/Alfamídia - Projeto Final Versão 1\n\n"
+                        +
+                        "1. Criar pessoa ou aluno.\n"
+                        +
+                        "2. Mostrar pessoas e alunos criados.\n"
+                        +
+                        "3. Atualizar pessoa ou aluno.\n"
+                        +
+                        "4. Deletar uma pessoa ou aluno.\n"
+                        +
+                        "5. Encerrar programa.\n\n"
+                        +
+                        "Insira sua opção: "
 
         );
 
@@ -101,11 +101,12 @@ public class Main {
 
     }
 
-    // Função responsável por adicionar informações, pessoas ou alunos, à "lista" principal, uma fusão das duas listas secundárias.
-    // Ela recebe 'input' do usuário para cada parâmetro de pessoa ou aluno, perguntando se o usuário quer acrescentar uma nota final de curso.
+    // Função responsável por adicionar pessoas ou alunos à lista.
+    // Ela recebe 'input' do usuário para cada parâmetro da pessoa ou aluno.
+    // Ela pergunta se o usuário quer acrescentar uma nota final de curso.
     // A reposta para a nota final de curso determina se uma pessoa ou um aluno é criado.
 
-    public static void addInformation(ArrayList<Person> list_of_people, ArrayList<Student> list_of_students, Scanner scanner) throws Exception {
+    public static void addInformation(ArrayList<Person> list, Scanner scanner) throws Exception {
 
         String name, phone_number, birth_date, registration_date, last_update_date, answer, final_grade;
         System.out.print("Insira o nome: ");
@@ -118,12 +119,12 @@ public class Main {
         registration_date = scanner.nextLine();
         System.out.print("Insira a data da última alteração: ");
         last_update_date = scanner.nextLine();
-        System.out.print("\nDesejas inserir uma nota final do curso? Sim ou não? (S/N): ");
+        System.out.print("\nDesejas inserir uma nota final de curso? Sim ou não? (S/N): ");
         answer = scanner.nextLine();
 
         if (answer.equals("N")) {
 
-            list_of_people.add(new Person(name, phone_number, birth_date, registration_date, last_update_date));
+            list.add(new Person(name, phone_number, birth_date, registration_date, last_update_date));
 
         }
 
@@ -131,7 +132,7 @@ public class Main {
 
             System.out.print("Insira a nota final do curso: ");
             final_grade = scanner.nextLine();
-            list_of_students.add(new Student(name, phone_number, birth_date, registration_date, last_update_date, final_grade));
+            list.add(new Student(name, phone_number, birth_date, registration_date, last_update_date, final_grade));
 
         }
 
@@ -144,30 +145,21 @@ public class Main {
 
     }
 
-    // Função responsável por mostrar a "lista" principal, uma fusão das listas secundárias.
+    // Função responsável por mostrar as pessoas e os alunos da lista na ordem em que foram acrescentados.
     // Ela usa um contador para listar os índices das pessoas e dos alunos.
-    // A lista secundária de pessoas é exibida antes da lista secundária de alunos.
-    // Ela tem um inteiro tipo, que determina se o usuário escolheu a opção dois de mostrar a "lista" principal, zero, ou...
-    // ...se a função está sendo chamada dentro de outras, nas opções três e quatro.
+    // Ela tem um inteiro 'type', que determina se o usuário escolheu a opção dois, de apenas mostrar a lista, ou...
+    // ...se a função está sendo chamada dentro de outras, nas opções três e quatro, nas quais mudanças na lista podem ser feitas.
 
-    public static void showList(ArrayList<Person> list_of_people, ArrayList<Student> list_of_students, Scanner scanner, int type) throws Exception {
+    public static void showList(ArrayList<Person> list, Scanner scanner, int type) throws Exception {
 
         int counter = 1;
 
-        if (!list_of_people.isEmpty() || !list_of_students.isEmpty()) {
+        if (!list.isEmpty()) {
 
-            for (Person person : list_of_people) {
-
-                System.out.print(counter + ". ");
-                System.out.println(person);
-                counter++;
-
-            }
-
-            for (Student student : list_of_students) {
+            for (Person item : list) {
 
                 System.out.print(counter + ". ");
-                System.out.println(student);
+                System.out.println(item);
                 counter++;
 
             }
@@ -190,36 +182,25 @@ public class Main {
 
     }
 
-    // Função principal responsável por alterar os parâmetros de pessoas e alunos.
-    // Ele recebe um 'input' do usário como índice da "lista" principal e calcula o índice equivalente nas listas secundárias.
+    // Função principal responsável por alterar os parâmetros das pessoas e dos alunos.
     // As pessoas e os alunos são alteradas numa função secundária.
 
-    public static void alterList(ArrayList<Person> list_of_people, ArrayList<Student> list_of_students, Scanner scanner) throws Exception {
+    public static void alterList(ArrayList<Person> list, Scanner scanner) throws Exception {
 
         int index;
 
-        try{
+        try {
 
-            if (!list_of_people.isEmpty() || !list_of_students.isEmpty()) {
+            if (!list.isEmpty()) {
 
-                showList(list_of_people, list_of_students, scanner, 1);
-                System.out.print("\nInsira o índice da pessoa ou de aluno que desejas deletar: ");
+                showList(list, scanner, 1);
+                System.out.print("\nInsira o índice da pessoa ou do aluno que desejas deletar: ");
                 index = scanner.nextInt();
                 scanner.nextLine();
 
-                if (!(index < 1 || index > list_of_people.size() + list_of_students.size())) {
+                if (!(index < 1 || index > list.size())) {
 
-                    if (index <= list_of_people.size()) {
-
-                        alterPersonOrStudent(list_of_people, list_of_students, scanner, index, 0);
-
-                    }
-
-                    else {
-
-                        alterPersonOrStudent(list_of_people, list_of_students, scanner, index, 1);
-
-                    }
+                    alterItem(list.get(index - 1), scanner);
 
                 }
 
@@ -239,7 +220,7 @@ public class Main {
 
             }
 
-        }catch(InputMismatchException e){
+        } catch (InputMismatchException e) {
 
             System.out.print("\nResposta inválida. ");
             scanner.nextLine();
@@ -249,14 +230,12 @@ public class Main {
 
     }
 
-    // Função secundária responsável por alterar os parâmetros de pessoas e alunos.
+    // Função secundária responsável por alterar os parâmetros das pessoas e dos alunos.
     // Ela pergunta se o usário quer alterar cada um dos parâmetros.
     // Ela utuliza dois vetores de 'Strings' para ter um código mais limpo.
-    // Ela tem um inteiro tipo, que determina se o usuário quer alterar uma pessoa, um, ou um aluno, zero.
 
-    public static void alterPersonOrStudent(ArrayList<Person> list_of_people, ArrayList<Student> list_of_students, Scanner scanner, int index, int type) {
+    public static void alterItem(Person item, Scanner scanner) {
 
-        int counter = 0;
         String answer, name, phone_number, birth_date, registration_date, last_update_date, final_grade;
         String[] text_1 = {
 
@@ -265,6 +244,7 @@ public class Main {
                 "\nDesejas alterar a data de nascimento? (S/N): ",
                 "\nDesejas alterar a data de cadastro? (S/N): ",
                 "\nDesejas alterar a última data de alteração? (S/N): ",
+                "\nDesejas alterar a nota final do curso? (S/N): "
 
         };
         String[] text_2 = {
@@ -273,122 +253,57 @@ public class Main {
                 "Insira o novo número de telefone: ",
                 "Insira a nova data de nascimento: ",
                 "Insira a nova data de cadastro: ",
-                "Insira o nova última data de alteração: ",
+                "Insira a nova última data de alteração: ",
+                "Insira a nova nota final do curso: "
 
         };
 
-        for (String auxiliary_text : text_1) {
+        for (int i = 0; i <= 4; i++) {
 
-            System.out.print(auxiliary_text);
+            System.out.print(text_1[i]);
             answer = scanner.nextLine();
 
             if (auxiliary_alter(answer) == true) {
 
-                switch (counter) {
+                switch (i) {
 
                     case 0:
 
-                        System.out.print(text_2[counter]);
+                        System.out.print(text_2[i]);
                         name = scanner.nextLine();
-
-                        if (type == 0) {
-
-                            list_of_people.get(index - 1).setName(name);
-
-                        }
-
-                        else {
-
-                            list_of_students.get(index - list_of_people.size() - 1).setName(name);
-
-                        }
+                        item.setName(name);
 
                         break;
 
                     case 1:
 
-                        System.out.print(text_2[counter]);
+                        System.out.print(text_2[i]);
                         phone_number = scanner.nextLine();
-
-                        if (type == 0) {
-
-                            list_of_people.get(index - 1).setPhoneNumber(phone_number);
-
-                        }
-
-                        else {
-
-                            list_of_students.get(index - list_of_people.size() - 1).setPhoneNumber(phone_number);
-
-                        }
+                        item.setPhoneNumber(phone_number);
 
                         break;
 
                     case 2:
 
-                        System.out.print(text_2[counter]);
+                        System.out.print(text_2[i]);
                         birth_date = scanner.nextLine();
-
-                        if (type == 0) {
-
-                            list_of_people.get(index - 1).setBirthDate(birth_date);
-
-                        }
-
-                        else {
-
-                            list_of_students.get(index - list_of_people.size() - 1).setBirthDate(birth_date);
-
-                        }
+                        item.setBirthDate(birth_date);
 
                         break;
 
                     case 3:
 
-                        System.out.print(text_2[counter]);
+                        System.out.print(text_2[i]);
                         registration_date = scanner.nextLine();
-
-                        if (type == 0) {
-
-                            list_of_people.get(index - 1).setRegistrationDate(registration_date);
-
-                        }
-
-                        else {
-
-                            list_of_students.get(index - list_of_people.size() - 1)
-                                    .setRegistrationDate(registration_date);
-
-                        }
+                        item.setRegistrationDate(registration_date);
 
                         break;
 
                     case 4:
 
-                        System.out.print(text_2[counter]);
+                        System.out.print(text_2[i]);
                         last_update_date = scanner.nextLine();
-
-                        if (type == 0) {
-
-                            list_of_people.get(index - 1).setLastUpdateDate(last_update_date);
-
-                        }
-
-                        else {
-
-                            list_of_students.get(index - list_of_people.size() - 1).setLastUpdateDate(last_update_date);
-                            System.out.print("\nDesejas alterar a nota final do curso? (S/N): ");
-                            answer = scanner.nextLine();
-
-                            if (auxiliary_alter(answer) == true) {
-
-                                System.out.print("Insira a nova nota final do curso: ");
-                                final_grade = scanner.nextLine();
-                                list_of_students.get(index - list_of_people.size() - 1).setFinalGrade(final_grade);
-
-                            }
-
-                        }
+                        item.setLastUpdateDate(last_update_date);
 
                         break;
 
@@ -396,13 +311,25 @@ public class Main {
 
             }
 
-            counter++;
+        }
 
+        if (item instanceof Student){
+
+            System.out.print(text_1[5]);
+            answer = scanner.nextLine();
+
+            if (auxiliary_alter(answer) == true) {
+
+                System.out.print(text_2[5]);
+                final_grade = scanner.nextLine();
+                ((Student) item).setFinalGrade(final_grade);
+
+            }
         }
 
     }
 
-    // Funçao auxiliar responsável por lidar com as respsotas do usuária na alteração de pessoas e alunos.
+    // Funçao auxiliar responsável por lidar com as respsotas do usuário na alteração das pessoas e dos alunos.
     // Ela retorna verdadeiro se a alteração será feita ou falso caso contrário.
     // Ela também retorna falso se a reposta for inválida, mas mostra no terminal que a resposta é inválida.
 
@@ -425,35 +352,25 @@ public class Main {
 
     }
 
-    // Função responsável por deleter uma pessoa ou um aluno da "lista" principal.
-    // Ele recebe um 'input' do usário como índice da "lista" principal e calcula o índice equivalente nas listas secundárias.
+    // Função responsável por deleter uma pessoa ou um aluno da lista.
+    // Ele recebe um 'input' índice da lista e então calcula o índice equivalente.
 
-    public static void deleteInformation(ArrayList<Person> list_of_people, ArrayList<Student> list_of_students, Scanner scanner) throws Exception {
+    public static void deleteInformation(ArrayList<Person> list, Scanner scanner) throws Exception {
 
         int index;
 
-        try{
+        try {
 
-            if (!list_of_people.isEmpty() || !list_of_students.isEmpty()) {
+            if (!list.isEmpty()) {
 
-                showList(list_of_people, list_of_students, scanner, 1);
+                showList(list, scanner, 1);
                 System.out.print("\nInsira o índice da pessoa ou de aluno que desejas deletar: ");
                 index = scanner.nextInt();
                 scanner.nextLine();
 
-                if (!(index < 1 || index > list_of_people.size() + list_of_students.size())) {
+                if (!(index < 1 || index > list.size())) {
 
-                    if (index > list_of_people.size()) {
-
-                        list_of_students.remove(index - list_of_people.size() - 1);
-
-                    }
-
-                    else {
-
-                        list_of_people.remove(index - 1);
-
-                    }
+                    list.remove(index - 1);
 
                 }
 
@@ -473,7 +390,7 @@ public class Main {
 
             }
 
-        }catch(InputMismatchException e){
+        } catch (InputMismatchException e) {
 
             System.out.print("\nResposta inválida. ");
             scanner.nextLine();

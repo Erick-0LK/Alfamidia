@@ -1,4 +1,4 @@
-public class Student extends Person {
+public class Student extends Person{
 
     private String final_grade;
 
