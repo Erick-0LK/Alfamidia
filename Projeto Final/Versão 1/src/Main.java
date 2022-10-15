@@ -1,4 +1,4 @@
-// +PraTi/Alfamídia - Projeto Final Versão 1
+// +PraTi/Alfamídia - Projeto Final: Versão 1
 // Erick Larratéa Knoblich
 
 // A primeira versão aceita qualquer String como válida para todos os parâmetros das pessoas e dos alunos.
@@ -69,43 +69,10 @@ public class Main {
 
     }
 
-    // Função responsável por mostratr o menu a cada iteração para o usuário.
-
-    public static void showMenu() {
-
-        System.out.print(
-
-                "+PraTi/Alfamídia - Projeto Final: Versão 1\n\n"
-                        +
-                        "1. Criar pessoa ou aluno.\n"
-                        +
-                        "2. Mostrar pessoas e alunos criados.\n"
-                        +
-                        "3. Atualizar pessoa ou aluno.\n"
-                        +
-                        "4. Deletar uma pessoa ou aluno.\n"
-                        +
-                        "5. Encerrar programa.\n\n"
-                        +
-                        "Insira sua opção: "
-
-        );
-
-    }
-
-    // Função responsável por limpar o terminal a cada iteração.
-
-    public static void clearTerminal() {
-
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-
-    }
-
     // Função responsável por adicionar pessoas ou alunos à lista.
-    // Ela recebe um 'input' do usuário para cada parâmetro da pessoa ou de aluno.
-    // Ela pergunta se o usuário quer acrescentar uma nota final de curso.
-    // A reposta para a nota final de curso determina se uma pessoa é criada ou um aluno é criado.
+    // Ela recebe informação do usuário para cada parâmetro das pessoas ou dos alunos.
+    // Ela pergunta se o usuário quer acrescentar uma nota final do curso.
+    // A reposta para a nota final do curso determina se uma pessoa é criado ou um aluno é criado.
 
     public static void addItem(ArrayList<Person> list, Scanner scanner) throws Exception {
 
@@ -149,8 +116,8 @@ public class Main {
 
     // Função responsável por mostrar as pessoas e os alunos da lista na ordem em que foram acrescentados.
     // Ela usa um índice para listar as pessoas e os alunos.
-    // Ela tem um inteiro 'type', que determina se o usuário escolheu a opção dois, de apenas mostrar a lista, ou...
-    // ...se a função está sendo chamada dentro de outras, nas opções três ou quatro, nas quais mudanças na lista podem ser feitas.
+    // Ela tem um inteiro tipo, que determina se o usuário escolheu a opção dois, de apenas mostrar a lista, ou...
+    // ...se a função está sendo chamada dentro de outras, nas opções três e quatro, nas quais mudanças na lista podem ser feitas.
 
     public static void showList(ArrayList<Person> list, Scanner scanner, int type) throws Exception {
 
@@ -197,7 +164,7 @@ public class Main {
 
     }
 
-    // Função principal responsável por alterar os parâmetros das pessoas e dos alunos.
+    // Função responsável por alterar a lista mudando os parâmetros das pessoas e dos alunos.
     // As pessoas e os alunos são alterados numa função secundária.
 
     public static void alterList(ArrayList<Person> list, Scanner scanner) throws Exception {
@@ -209,7 +176,7 @@ public class Main {
             if (!list.isEmpty()) {
 
                 showList(list, scanner, 1);
-                System.out.print("\nInsira o índice da pessoa ou do aluno que desejas deletar: ");
+                System.out.print("\nInsira o índice da pessoa ou do aluno que desejas alterar: ");
                 index = scanner.nextInt();
                 scanner.nextLine();
 
@@ -245,7 +212,7 @@ public class Main {
 
     }
 
-    // Função secundária responsável por alterar os parâmetros das pessoas e dos alunos.
+    // Função responsável por alterar os parâmetros das pessoas e dos alunos.
     // Ela pergunta se o usário quer alterar cada um dos parâmetros.
 
     public static void alterItem(Person item, Scanner scanner) {
@@ -360,8 +327,8 @@ public class Main {
 
     }
 
-    // Função responsável por deleter uma pessoa ou um aluno da lista.
-    // Ele recebe um 'input' índice e então calcula o índice equivalente para a remoção.
+    // Função responsável por deletar uma pessoa ou um aluno da lista.
+    // Ele recebe um inteiro índice do usário e então calcula o índice equivalente na lista para a remoção.
 
     public static void removeItem(ArrayList<Person> list, Scanner scanner) throws Exception {
 
@@ -405,6 +372,39 @@ public class Main {
             Thread.sleep(3000);
 
         }
+
+    }
+
+    // Função responsável por mostratr o menu a cada iteração para o usuário.
+
+    public static void showMenu() {
+
+        System.out.print(
+
+                "+PraTi/Alfamídia - Projeto Final: Versão 1\n\n"
+                        +
+                        "1. Criar pessoa ou aluno.\n"
+                        +
+                        "2. Mostrar pessoas e alunos criados.\n"
+                        +
+                        "3. Atualizar pessoa ou aluno.\n"
+                        +
+                        "4. Deletar uma pessoa ou aluno.\n"
+                        +
+                        "5. Encerrar programa.\n\n"
+                        +
+                        "Insira sua opção: "
+
+        );
+
+    }
+
+    // Função responsável por limpar o terminal a cada iteração.
+
+    public static void clearTerminal() {
+
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
 
     }
 

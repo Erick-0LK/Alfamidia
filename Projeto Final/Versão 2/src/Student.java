@@ -1,5 +1,4 @@
 import java.text.DecimalFormat;
-import java.math.*;
 
 public class Student extends Person{
 
@@ -87,7 +86,6 @@ public class Student extends Person{
     public String toString() {
 
         DecimalFormat decimal_format = new DecimalFormat("#.##");
-        decimal_format.setRoundingMode(RoundingMode.DOWN);
         return super.toString() + "\nNota final do curso: " + decimal_format.format(Float.parseFloat(this.final_grade));
 
     }
