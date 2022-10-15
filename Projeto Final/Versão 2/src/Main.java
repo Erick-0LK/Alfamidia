@@ -78,13 +78,13 @@ public class Main {
     public static void addItemToList(ArrayList<Person> list, Scanner scanner) {
 
         int index;
-        String name = "", phone_number = "", birth_date = "", registration_date = "", last_update_date = "", final_grade = "";
+        String name = null, phone_number = null, birth_date = null, registration_date = null, last_update_date = null, final_grade = null;
         String[] text = {"Exemplo de nome: Fulano Sicrano Beltrano\nInsira o nome: ",
                          "\nExemplo de número de telefone: 5551123456789\nInsira o número de telefone: ",
                          "\nExemplo de data de nascimento: 01/01/2001\nInsira a data de nascimento: ",
                          "\nExemplo de data de cadastro: 01/01/2001\nInsira a data de cadastro: ",
                          "\nExemplo de última data de alteração: 01/01/2001\nInsira a data da última alteração: ",
-                         "\nDesejas inserir uma nota final de curso? Sim ou não? (S/N): ",
+                         "\nDesejas inserir uma nota final do curso? Sim ou não? (S/N): ",
                          "\nExemplo de nota final do curso: 0 <= x <= 10\nInsira a nota final do curso: "};
 
         for (index = 0; index <= 4; index++){
@@ -244,12 +244,12 @@ public class Main {
     public static void updateItem(Person item, Scanner scanner) {
 
         int index;
-        String[] text_1 = {"\nDesejas alterar o nome? (S/N): ",
-                           "\nDesejas alterar o número de telefone? (S/N): ",
-                           "\nDesejas alterar a data de nascimento? (S/N): ",
-                           "\nDesejas alterar a data de cadastro? (S/N): ",
-                           "\nDesejas alterar a última data de alteração? (S/N): ",
-                           "\nDesejas alterar a nota final do curso? (S/N): "};
+        String[] text_1 = {"\nDesejas alterar o nome? Sim ou não? (S/N): ",
+                           "\nDesejas alterar o número de telefone? Sim ou não? (S/N): ",
+                           "\nDesejas alterar a data de nascimento? Sim ou não? (S/N): ",
+                           "\nDesejas alterar a data de cadastro? Sim ou não? (S/N): ",
+                           "\nDesejas alterar a última data de alteração? Sim ou não? (S/N): ",
+                           "\nDesejas alterar a nota final do curso? Sim ou não? (S/N): "};
         String[] text_2 = {"Exemplo de nome: Fulano Sicrano Beltrano\nInsira o novo nome: ",
                            "Exemplo de número de telefone: 5551123456789\nInsira o novo número de telefone: ",
                            "Exemplo de data de nascimento: 01/01/2001\nInsira a nova data de nascimento: ",
@@ -325,7 +325,7 @@ public class Main {
             if (!list.isEmpty()) {
 
                 showList(list, scanner, 1);
-                System.out.print("\nInsira o índice da pessoa ou de aluno que desejas deletar: ");
+                System.out.print("Insira o índice da pessoa ou de aluno que desejas deletar: ");
                 index = scanner.nextInt();
                 scanner.nextLine();
 
@@ -457,7 +457,7 @@ public class Main {
     public static String checkPhoneNumber2(String text, Scanner scanner, int type){
 
         boolean auxiliary = false;
-        String phone_number = "";
+        String phone_number = null;
 
         while (auxiliary == false){
 
@@ -569,7 +569,7 @@ public class Main {
     public static String checkDate2(String text, Scanner scanner, int type){
 
         boolean auxiliary = false;
-        String date = "";
+        String date = null;
 
         while (auxiliary == false){
 
@@ -630,7 +630,7 @@ public class Main {
     public static String checkFinalGrade2(String text, Scanner scanner, int type){
 
         boolean auxiliary = false;
-        String final_grade = "";
+        String final_grade = null;
 
         while (auxiliary == false){
 

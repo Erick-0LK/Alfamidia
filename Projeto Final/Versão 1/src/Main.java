@@ -88,7 +88,7 @@ public class Main {
         registration_date = scanner.nextLine();
         System.out.print("\nInsira a data da última alteração: ");
         last_update_date = scanner.nextLine();
-        System.out.print("\nDesejas inserir uma nota final de curso? Sim ou não? (S/N): ");
+        System.out.print("\nDesejas inserir uma nota final do curso? Sim ou não? (S/N): ");
         answer = scanner.nextLine();
 
         if (answer.equals("N")) {
@@ -219,12 +219,12 @@ public class Main {
 
         int index;
         String answer, name, phone_number, birth_date, registration_date, last_update_date, final_grade;
-        String[] text_1 = {"\nDesejas alterar o nome? (S/N): ",
-                           "\nDesejas alterar o número de telefone? (S/N): ",
-                           "\nDesejas alterar a data de nascimento? (S/N): ",
-                           "\nDesejas alterar a data de cadastro? (S/N): ",
-                           "\nDesejas alterar a última data de alteração? (S/N): ",
-                           "\nDesejas alterar a nota final do curso? (S/N): "};
+        String[] text_1 = {"\nDesejas alterar o nome? Sim ou não? (S/N): ",
+                           "\nDesejas alterar o número de telefone? Sim ou não? (S/N): ",
+                           "\nDesejas alterar a data de nascimento? Sim ou não? (S/N): ",
+                           "\nDesejas alterar a data de cadastro? Sim ou não? (S/N): ",
+                           "\nDesejas alterar a última data de alteração? Sim ou não? (S/N): ",
+                           "\nDesejas alterar a nota final do curso? Sim ou não? (S/N): "};
         String[] text_2 = {"Insira o novo nome: ",
                            "Insira o novo número de telefone: ",
                            "Insira a nova data de nascimento: ",
