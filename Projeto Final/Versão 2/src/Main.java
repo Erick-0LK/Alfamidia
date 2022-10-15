@@ -75,7 +75,7 @@ public class Main {
     // Ela pergunta se o usuário quer acrescentar uma nota final do curso.
     // A reposta para a nota final do curso determina se uma pessoa é criado ou um aluno é criado.
 
-    public static void addItemToList(ArrayList<Person> list, Scanner scanner) throws Exception{
+    public static void addItemToList(ArrayList<Person> list, Scanner scanner) {
 
         int index;
         String name = "", phone_number = "", birth_date = "", registration_date = "", last_update_date = "", final_grade = "";
