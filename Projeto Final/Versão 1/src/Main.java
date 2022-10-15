@@ -1,7 +1,7 @@
 // +PraTi/Alfamídia - Projeto Final: Versão 1
 // Erick Larratéa Knoblich
 
-// A primeira versão aceita qualquer String como válida para todos os parâmetros das pessoas e dos alunos.
+// A primeira versão aceita qualquer String como válida para todos os parâmetros das pessoas e dos alunos e não contém algumas funções secundárias.
 // Ela é uma versão de teste rápido para checar se as funções principais funcionam.
 
 import java.util.Scanner;
@@ -32,7 +32,7 @@ public class Main {
 
                 case "1":
 
-                    addItem(list, scanner);
+                    addItemToList(list, scanner);
                     break;
 
                 case "2":
@@ -42,12 +42,12 @@ public class Main {
 
                 case "3":
 
-                    alterList(list, scanner);
+                    updateItemOnList(list, scanner);
                     break;
 
                 case "4":
 
-                    removeItem(list, scanner);
+                    removeItemOnList(list, scanner);
                     break;
 
                 case "5":
@@ -74,7 +74,7 @@ public class Main {
     // Ela pergunta se o usuário quer acrescentar uma nota final do curso.
     // A reposta para a nota final do curso determina se uma pessoa é criado ou um aluno é criado.
 
-    public static void addItem(ArrayList<Person> list, Scanner scanner) throws Exception {
+    public static void addItemToList(ArrayList<Person> list, Scanner scanner) throws Exception {
 
         String answer, name, phone_number, birth_date, registration_date, last_update_date, final_grade;
 
@@ -167,7 +167,7 @@ public class Main {
     // Função responsável por alterar a lista mudando os parâmetros das pessoas e dos alunos.
     // As pessoas e os alunos são alterados numa função secundária.
 
-    public static void alterList(ArrayList<Person> list, Scanner scanner) throws Exception {
+    public static void updateItemOnList(ArrayList<Person> list, Scanner scanner) throws Exception {
 
         int index;
 
@@ -176,13 +176,13 @@ public class Main {
             if (!list.isEmpty()) {
 
                 showList(list, scanner, 1);
-                System.out.print("\nInsira o índice da pessoa ou do aluno que desejas alterar: ");
+                System.out.print("Insira o índice da pessoa ou do aluno que desejas alterar: ");
                 index = scanner.nextInt();
                 scanner.nextLine();
 
                 if (!(index < 1 || index > list.size())) {
 
-                    alterItem(list.get(index - 1), scanner);
+                    updateItem(list.get(index - 1), scanner);
 
                 }
 
@@ -215,7 +215,7 @@ public class Main {
     // Função responsável por alterar os parâmetros das pessoas e dos alunos.
     // Ela pergunta se o usário quer alterar cada um dos parâmetros.
 
-    public static void alterItem(Person item, Scanner scanner) {
+    public static void updateItem(Person item, Scanner scanner) {
 
         int index;
         String answer, name, phone_number, birth_date, registration_date, last_update_date, final_grade;
@@ -237,13 +237,14 @@ public class Main {
             System.out.print(text_1[index]);
             answer = scanner.nextLine();
 
-            if (auxiliary_alter(answer) == true) {
+            if (auxiliary_update(answer) == true) {
+
+                System.out.print(text_2[index]);
 
                 switch (index) {
 
                     case 0:
 
-                        System.out.print(text_2[index]);
                         name = scanner.nextLine();
                         item.setName(name);
 
@@ -251,7 +252,6 @@ public class Main {
 
                     case 1:
 
-                        System.out.print(text_2[index]);
                         phone_number = scanner.nextLine();
                         item.setPhoneNumber(phone_number);
 
@@ -259,7 +259,6 @@ public class Main {
 
                     case 2:
 
-                        System.out.print(text_2[index]);
                         birth_date = scanner.nextLine();
                         item.setBirthDate(birth_date);
 
@@ -267,7 +266,6 @@ public class Main {
 
                     case 3:
 
-                        System.out.print(text_2[index]);
                         registration_date = scanner.nextLine();
                         item.setRegistrationDate(registration_date);
 
@@ -275,7 +273,6 @@ public class Main {
 
                     case 4:
 
-                        System.out.print(text_2[index]);
                         last_update_date = scanner.nextLine();
                         item.setLastUpdateDate(last_update_date);
 
@@ -292,7 +289,7 @@ public class Main {
             System.out.print(text_1[5]);
             answer = scanner.nextLine();
 
-            if (auxiliary_alter(answer) == true) {
+            if (auxiliary_update(answer) == true) {
 
                 System.out.print(text_2[5]);
                 final_grade = scanner.nextLine();
@@ -308,7 +305,7 @@ public class Main {
     // Ela retorna verdadeiro se a alteração será feita ou falso caso contrário.
     // Ela também retorna falso se a reposta for inválida, mas mostra no terminal que a resposta é inválida.
 
-    public static boolean auxiliary_alter(String answer) {
+    public static boolean auxiliary_update(String answer) {
 
         if (answer.equals("S")) {
 
@@ -330,7 +327,7 @@ public class Main {
     // Função responsável por deletar uma pessoa ou um aluno da lista.
     // Ele recebe um inteiro índice do usário e então calcula o índice equivalente na lista para a remoção.
 
-    public static void removeItem(ArrayList<Person> list, Scanner scanner) throws Exception {
+    public static void removeItemOnList(ArrayList<Person> list, Scanner scanner) throws Exception {
 
         int index;
 
