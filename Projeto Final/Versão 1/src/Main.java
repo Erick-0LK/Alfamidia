@@ -1,7 +1,8 @@
 // +PraTi/Alfamídia - Projeto Final Versão 1
 // Erick Larratéa Knoblich
 
-// A primeira versão utiliza o Scanner para cada 'input' do usuário.
+// A primeira versão aceita qualquer String como válida para todos os parâmetros das pessoas e dos alunos.
+// Ela é uma versão de teste rápido para checar se as funções principais funcionam.
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class Main {
 
                 case "1":
 
-                    addInformation(list, scanner);
+                    addItem(list, scanner);
                     break;
 
                 case "2":
@@ -46,7 +47,7 @@ public class Main {
 
                 case "4":
 
-                    deleteInformation(list, scanner);
+                    removeItem(list, scanner);
                     break;
 
                 case "5":
@@ -74,7 +75,7 @@ public class Main {
 
         System.out.print(
 
-                "+PraTi/Alfamídia - Projeto Final Versão 1\n\n"
+                "+PraTi/Alfamídia - Projeto Final: Versão 1\n\n"
                         +
                         "1. Criar pessoa ou aluno.\n"
                         +
@@ -102,22 +103,23 @@ public class Main {
     }
 
     // Função responsável por adicionar pessoas ou alunos à lista.
-    // Ela recebe 'input' do usuário para cada parâmetro da pessoa ou aluno.
+    // Ela recebe um 'input' do usuário para cada parâmetro da pessoa ou de aluno.
     // Ela pergunta se o usuário quer acrescentar uma nota final de curso.
-    // A reposta para a nota final de curso determina se uma pessoa ou um aluno é criado.
+    // A reposta para a nota final de curso determina se uma pessoa é criada ou um aluno é criado.
 
-    public static void addInformation(ArrayList<Person> list, Scanner scanner) throws Exception {
+    public static void addItem(ArrayList<Person> list, Scanner scanner) throws Exception {
 
-        String name, phone_number, birth_date, registration_date, last_update_date, answer, final_grade;
+        String answer, name, phone_number, birth_date, registration_date, last_update_date, final_grade;
+
         System.out.print("Insira o nome: ");
         name = scanner.nextLine();
-        System.out.print("Insira o número de telefone: ");
+        System.out.print("\nInsira o número de telefone: ");
         phone_number = scanner.nextLine();
-        System.out.print("Insira a data de nascimento: ");
+        System.out.print("\nInsira a data de nascimento: ");
         birth_date = scanner.nextLine();
-        System.out.print("Insira a data de cadastro: ");
+        System.out.print("\nInsira a data de cadastro: ");
         registration_date = scanner.nextLine();
-        System.out.print("Insira a data da última alteração: ");
+        System.out.print("\nInsira a data da última alteração: ");
         last_update_date = scanner.nextLine();
         System.out.print("\nDesejas inserir uma nota final de curso? Sim ou não? (S/N): ");
         answer = scanner.nextLine();
@@ -130,7 +132,7 @@ public class Main {
 
         else if (answer.equals("S")) {
 
-            System.out.print("Insira a nota final do curso: ");
+            System.out.print("\nInsira a nota final do curso: ");
             final_grade = scanner.nextLine();
             list.add(new Student(name, phone_number, birth_date, registration_date, last_update_date, final_grade));
 
@@ -138,7 +140,7 @@ public class Main {
 
         else {
 
-            System.out.print("\nResposta inválida. ");
+            System.out.print("\nResposta inválida. Nenhuma pessoa ou aluno será criado. ");
             Thread.sleep(3000);
 
         }
@@ -146,9 +148,9 @@ public class Main {
     }
 
     // Função responsável por mostrar as pessoas e os alunos da lista na ordem em que foram acrescentados.
-    // Ela usa um contador para listar os índices das pessoas e dos alunos.
+    // Ela usa um índice para listar as pessoas e os alunos.
     // Ela tem um inteiro 'type', que determina se o usuário escolheu a opção dois, de apenas mostrar a lista, ou...
-    // ...se a função está sendo chamada dentro de outras, nas opções três e quatro, nas quais mudanças na lista podem ser feitas.
+    // ...se a função está sendo chamada dentro de outras, nas opções três ou quatro, nas quais mudanças na lista podem ser feitas.
 
     public static void showList(ArrayList<Person> list, Scanner scanner, int type) throws Exception {
 
@@ -196,7 +198,7 @@ public class Main {
     }
 
     // Função principal responsável por alterar os parâmetros das pessoas e dos alunos.
-    // As pessoas e os alunos são alteradas numa função secundária.
+    // As pessoas e os alunos são alterados numa função secundária.
 
     public static void alterList(ArrayList<Person> list, Scanner scanner) throws Exception {
 
@@ -245,33 +247,25 @@ public class Main {
 
     // Função secundária responsável por alterar os parâmetros das pessoas e dos alunos.
     // Ela pergunta se o usário quer alterar cada um dos parâmetros.
-    // Ela utuliza dois vetores de 'Strings' para ter um código mais limpo.
 
     public static void alterItem(Person item, Scanner scanner) {
 
+        int index;
         String answer, name, phone_number, birth_date, registration_date, last_update_date, final_grade;
-        String[] text_1 = {
+        String[] text_1 = {"\nDesejas alterar o nome? (S/N): ",
+                           "\nDesejas alterar o número de telefone? (S/N): ",
+                           "\nDesejas alterar a data de nascimento? (S/N): ",
+                           "\nDesejas alterar a data de cadastro? (S/N): ",
+                           "\nDesejas alterar a última data de alteração? (S/N): ",
+                           "\nDesejas alterar a nota final do curso? (S/N): "};
+        String[] text_2 = {"Insira o novo nome: ",
+                           "Insira o novo número de telefone: ",
+                           "Insira a nova data de nascimento: ",
+                           "Insira a nova data de cadastro: ",
+                           "Insira a nova última data de alteração: ",
+                           "Insira a nova nota final do curso: "};
 
-                "\nDesejas alterar o nome? (S/N): ",
-                "\nDesejas alterar o número de telefone? (S/N): ",
-                "\nDesejas alterar a data de nascimento? (S/N): ",
-                "\nDesejas alterar a data de cadastro? (S/N): ",
-                "\nDesejas alterar a última data de alteração? (S/N): ",
-                "\nDesejas alterar a nota final do curso? (S/N): "
-
-        };
-        String[] text_2 = {
-
-                "Insira o novo nome: ",
-                "Insira o novo número de telefone: ",
-                "Insira a nova data de nascimento: ",
-                "Insira a nova data de cadastro: ",
-                "Insira a nova última data de alteração: ",
-                "Insira a nova nota final do curso: "
-
-        };
-
-        for (int index = 0; index <= 4; index++) {
+        for (index = 0; index <= 4; index++) {
 
             System.out.print(text_1[index]);
             answer = scanner.nextLine();
@@ -343,7 +337,7 @@ public class Main {
 
     }
 
-    // Funçao auxiliar responsável por lidar com as respsotas do usuário na alteração das pessoas e dos alunos.
+    // Função auxiliar responsável por lidar com as respsotas do usuário na alteração das pessoas e dos alunos.
     // Ela retorna verdadeiro se a alteração será feita ou falso caso contrário.
     // Ela também retorna falso se a reposta for inválida, mas mostra no terminal que a resposta é inválida.
 
@@ -357,7 +351,7 @@ public class Main {
 
         else if (!answer.equals("N")) {
 
-            System.out.println("Resposta inválida.");
+            System.out.println("Resposta inválida. O parâmetro não foi alterado. ");
             return false;
 
         }
@@ -367,9 +361,9 @@ public class Main {
     }
 
     // Função responsável por deleter uma pessoa ou um aluno da lista.
-    // Ele recebe um 'input' índice da lista e então calcula o índice equivalente.
+    // Ele recebe um 'input' índice e então calcula o índice equivalente para a remoção.
 
-    public static void deleteInformation(ArrayList<Person> list, Scanner scanner) throws Exception {
+    public static void removeItem(ArrayList<Person> list, Scanner scanner) throws Exception {
 
         int index;
 

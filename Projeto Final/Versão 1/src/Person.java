@@ -1,10 +1,6 @@
 public class Person {
 
-    protected String name;
-    protected String phone_number;
-    protected String birth_date;
-    protected String registration_date;
-    protected String last_update_date;
+    protected String name, phone_number, birth_date, registration_date, last_update_date;
 
     Person(String name, String phone_number, String birth_date, String registration_date, String last_update_date) {
 
@@ -81,8 +77,9 @@ public class Person {
         String information = "Nome: " + this.name + "\n" +
                              "Número de telefone: " + this.phone_number + "\n" +
                              "Data de nascimento: " + this.birth_date + "\n" +
-                             "Data de cadastro: " + this.registration_date + "\n" +
-                             "Última data de alteração: " + this.last_update_date;
+                             "Data de cadastro: "   + this.registration_date + "\n" +
+                             "Data de nascimento: " + this.last_update_date;
+                                                      
 
         return information;
         
