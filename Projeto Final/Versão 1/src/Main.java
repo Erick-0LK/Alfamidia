@@ -127,14 +127,14 @@ public class Main {
 
             for (Person item : list) {
 
-                if (item instanceof Student){
+                if (item instanceof Student) {
 
                     System.out.println(index + ". Aluno: " + item.getName() + "\n");
                     System.out.println(item);
 
                 }
 
-                else{
+                else {
 
                     System.out.println(index + ". Pessoa: " + item.getName() + "\n");
                     System.out.println(item);
@@ -247,35 +247,30 @@ public class Main {
 
                         name = scanner.nextLine();
                         item.setName(name);
-
                         break;
 
                     case 1:
 
                         phone_number = scanner.nextLine();
                         item.setPhoneNumber(phone_number);
-
                         break;
 
                     case 2:
 
                         birth_date = scanner.nextLine();
                         item.setBirthDate(birth_date);
-
                         break;
 
                     case 3:
 
                         registration_date = scanner.nextLine();
                         item.setRegistrationDate(registration_date);
-
                         break;
 
                     case 4:
 
                         last_update_date = scanner.nextLine();
                         item.setLastUpdateDate(last_update_date);
-
                         break;
 
                 }
@@ -284,7 +279,7 @@ public class Main {
 
         }
 
-        if (item instanceof Student){
+        if (item instanceof Student) {
 
             System.out.print(text_1[5]);
             answer = scanner.nextLine();
@@ -376,23 +371,13 @@ public class Main {
 
     public static void showMenu() {
 
-        System.out.print(
-
-                "+PraTi/Alfamídia - Projeto Final: Versão 1\n\n"
-                        +
-                        "1. Criar pessoa ou aluno.\n"
-                        +
-                        "2. Mostrar pessoas e alunos criados.\n"
-                        +
-                        "3. Atualizar pessoa ou aluno.\n"
-                        +
-                        "4. Deletar uma pessoa ou aluno.\n"
-                        +
-                        "5. Encerrar programa.\n\n"
-                        +
-                        "Insira sua opção: "
-
-        );
+        System.out.print("+PraTi/Alfamídia - Projeto Final: Versão 1\n\n" +
+                         "1. Criar pessoa ou aluno.\n" +
+                         "2. Mostrar pessoas e alunos criados.\n" +
+                         "3. Atualizar pessoa ou aluno.\n" +
+                         "4. Deletar uma pessoa ou aluno.\n" +
+                         "5. Encerrar programa.\n\n" +
+                         "Insira sua opção: ");
 
     }
 

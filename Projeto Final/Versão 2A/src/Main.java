@@ -87,11 +87,11 @@ public class Main {
                          "\nDesejas inserir uma nota final do curso? Sim ou não? (S/N): ",
                          "\nExemplo de nota final do curso: 0 <= x <= 10\nInsira a nota final do curso: "};
 
-        for (index = 0; index <= 4; index++){
+        for (index = 0; index <= 4; index++) {
 
             System.out.print(text[index]);
 
-            switch (index){
+            switch (index) {
 
                 case 0:
 
@@ -153,14 +153,14 @@ public class Main {
 
             for (Person item : list) {
 
-                if (item instanceof Student){
+                if (item instanceof Student) {
 
                     System.out.println(index + ". Aluno: " + item.getName() + "\n");
                     System.out.println(item);
 
                 }
 
-                else{
+                else {
 
                     System.out.println(index + ". Pessoa: " + item.getName() + "\n");
                     System.out.println(item);
@@ -298,7 +298,7 @@ public class Main {
 
         }
 
-        if (item instanceof Student){
+        if (item instanceof Student) {
 
             System.out.print(text_1[5]);
 
@@ -365,23 +365,13 @@ public class Main {
 
     public static void showMenu() {
 
-        System.out.print(
-
-                "+PraTi/Alfamídia - Projeto Final: Versão 2\n\n"
-                        +
-                        "1. Criar pessoa ou aluno.\n"
-                        +
-                        "2. Mostrar pessoas e alunos criados.\n"
-                        +
-                        "3. Atualizar pessoa ou aluno.\n"
-                        +
-                        "4. Deletar uma pessoa ou aluno.\n"
-                        +
-                        "5. Encerrar programa.\n\n"
-                        +
-                        "Insira sua opção: "
-
-        );
+        System.out.print("+PraTi/Alfamídia - Projeto Final: Versão 2\n\n" +
+                         "1. Criar pessoa ou aluno.\n" +
+                         "2. Mostrar pessoas e alunos criados.\n" +
+                         "3. Atualizar pessoa ou aluno.\n" +
+                         "4. Deletar uma pessoa ou aluno.\n" +
+                         "5. Encerrar programa.\n\n" +
+                         "Insira sua opção: ");
 
     }
 
@@ -401,7 +391,7 @@ public class Main {
 
         String answer = scanner.nextLine();
 
-        while (!(answer.equals("S") || answer.equals("N"))){
+        while (!(answer.equals("S") || answer.equals("N"))) {
 
             System.out.println("Resposta inválida. Por favor, tente novamente. ");
             System.out.print(text);
@@ -409,41 +399,32 @@ public class Main {
 
         }
 
-        if (answer.equals("S")) {
-
-            return true;
-
-        }
-
-        else{
-
-            return false;
-
-        }
+        boolean output = answer.equals("S") ? true : false;
+        return output;
 
     }
 
     // Função responsável por determinar se o número de telefone é válido.
     // Ele precisa ter treze dígitos e ser um número inteiro.
     
-    public static boolean checkPhoneNumber1(String phone_number){
+    public static boolean checkPhoneNumber1(String phone_number) {
 
-        try{
+        try {
 
-            if (phone_number.length() == 13){
+            if (phone_number.length() == 13) {
 
                 Long.parseLong(phone_number);
                 return true;
 
             }
 
-            else{
+            else {
 
                 return false;
 
             }
 
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
 
             return false;
 
@@ -454,21 +435,21 @@ public class Main {
     // Função responsável por forçar o usuário a inserir um número de telefone válido.
     // Ela mantém a identação no terminal por meio do inteiro tipo.
 
-    public static String checkPhoneNumber2(String text, Scanner scanner, int type){
+    public static String checkPhoneNumber2(String text, Scanner scanner, int type) {
 
         boolean auxiliary = false;
         String phone_number = null;
 
-        while (auxiliary == false){
+        while (auxiliary == false) {
 
             phone_number = scanner.nextLine();
             auxiliary = checkPhoneNumber1(phone_number);
 
-            if (auxiliary == false){
+            if (auxiliary == false) {
                 
                 System.out.println("Resposta inválida. Por favor, tente novamente. ");
 
-                if (type == 1){
+                if (type == 1) {
 
                     System.out.println();
 
@@ -487,37 +468,37 @@ public class Main {
     // Função responsável por determinar se a data é válida.
     // Ela precisa seguir o calendário gregoriano.
 
-    public static boolean checkDate1(String date){
+    public static boolean checkDate1(String date) {
 
-        try{
+        try {
 
-            if (date.length() == 10){
+            if (date.length() == 10) {
 
                 int day = Integer.parseInt(date.substring(0, 2));
                 int month = Integer.parseInt(date.substring(3, 5));
                 int year = Integer.parseInt(date.substring(6, 10));
 
-                if (day < 1 || month < 1 || month > 12 || year < 1){
+                if (day < 1 || month < 1 || month > 12 || year < 1) {
 
                     return false;
 
                 }
 
-                else if(month == 2 && day < 29){
+                else if (month == 2 && day < 29) {
 
                     return true;
 
                 }
 
-                else if(month == 4 || month == 6 || month == 9 || month == 11){
+                else if (month == 4 || month == 6 || month == 9 || month == 11) {
 
-                    if (day < 31){
+                    if (day < 31) {
 
                         return true;
 
                     }
 
-                    else{
+                    else {
 
                         return false;
 
@@ -525,15 +506,15 @@ public class Main {
 
                 }
 
-                else if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12){
+                else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
 
-                    if (day < 32){
+                    if (day < 32) {
 
                         return true;
 
                     }
 
-                    else{
+                    else {
 
                         return false;
 
@@ -541,7 +522,7 @@ public class Main {
 
                 }
 
-                else{
+                else {
 
                     return false;
 
@@ -549,13 +530,13 @@ public class Main {
 
             }
 
-            else{
+            else {
 
                 return false;
 
             }
 
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
 
             return false;
 
@@ -566,21 +547,21 @@ public class Main {
     // Função responsável por forçar o usuário a inserir uma data válida.
     // Ela mantém a identação no terminal por meio do inteiro tipo.
 
-    public static String checkDate2(String text, Scanner scanner, int type){
+    public static String checkDate2(String text, Scanner scanner, int type) {
 
         boolean auxiliary = false;
         String date = null;
 
-        while (auxiliary == false){
+        while (auxiliary == false) {
 
             date = scanner.nextLine();
             auxiliary = checkDate1(date);
 
-            if (auxiliary == false){
+            if (auxiliary == false) {
                 
                 System.out.println("Resposta inválida. Por favor, tente novamente. ");
 
-                if (type == 1){
+                if (type == 1) {
 
                     System.out.println();
 
@@ -600,23 +581,23 @@ public class Main {
     // Ela precisa ser um número real entre zero e dez, ambos inclusos.
     // Apenas os dois primeiros dígitos da expansão decimal são considerados na hora da exibição, com arredondamento.
 
-    public static boolean checkFinalGrade1(String final_grade){
+    public static boolean checkFinalGrade1(String final_grade) {
 
-        try{
+        try {
 
-            if (Float.parseFloat(final_grade) >= 0 && Float.parseFloat(final_grade) <= 10){
+            if (Float.parseFloat(final_grade) >= 0 && Float.parseFloat(final_grade) <= 10) {
 
                 return true;
 
             }
 
-            else{
+            else {
 
                 return false;
 
             }
         
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
 
             return false;
 
@@ -627,21 +608,21 @@ public class Main {
     // Função responsável por forçar o usuário a inserir uma nota final do curso válida.
     // Ela mantém a identação no terminal.
 
-    public static String checkFinalGrade2(String text, Scanner scanner, int type){
+    public static String checkFinalGrade2(String text, Scanner scanner, int type) {
 
         boolean auxiliary = false;
         String final_grade = null;
 
-        while (auxiliary == false){
+        while (auxiliary == false) {
 
             final_grade = scanner.nextLine();
             auxiliary = checkFinalGrade1(final_grade);
 
-            if (auxiliary == false){
+            if (auxiliary == false) {
                 
                 System.out.println("Resposta inválida. Por favor, tente novamente. ");
 
-                if (type == 1){
+                if (type == 1) {
 
                     System.out.println();
 

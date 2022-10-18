@@ -77,10 +77,8 @@ public class Person {
         String information = "Nome: " + this.name + "\n" +
                              "Número de telefone: " + this.phone_number + "\n" +
                              "Data de nascimento: " + this.birth_date + "\n" +
-                             "Data de cadastro: "   + this.registration_date + "\n" +
-                             "Data de nascimento: " + this.last_update_date;
-                                                      
-
+                             "Data de cadastro: " + this.registration_date + "\n" +
+                             "Última data de alteração: " + this.last_update_date;                                    
         return information;
         
     }
