@@ -1,6 +1,6 @@
 # +PraTi/Alfamídia
 
-Esse repositório contém o projeto final e a minha versão do jogo simples feito pelo professor Rodrigo durante o curso. O projeto final é o conteúdo mais imporante, sendo que ele possui duas versões.
+Esse repositório contém o projeto final e a minha versão do jogo simples feito pelo professor Rodrigo durante o curso. O projeto final é o conteúdo mais imporante, sendo que ele possui três versões: uma de teste em Java, uma final em Java e uma bônus em Python.
 
 # Versão 1 :coffee:
 
