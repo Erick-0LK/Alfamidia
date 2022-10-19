@@ -1,15 +1,19 @@
-# +PraTi/Alfamídia
+# +PraTi/Alfamídia - Projeto Final :books:
 
-Esse repositório contém o projeto final e a minha versão do jogo simples feito pelo professor Rodrigo durante o curso. O projeto final é o conteúdo mais imporante, sendo que ele possui três versões: uma de teste em Java, uma final em Java e uma bônus em Python.
+O projeto final é uma CRUD (Create, Read, Update e Delete) que lida com duas classes: a classe pessoa e a classe aluno. A classe pessoa possuem as seguintes propriedades protegidas: nome, número de telefone, data de nascimento, data de cadastro e última data de alteração. Já a classe classe, por ser uma classe herdade da classe pessoa, além das prorpiedades já mencionadas, possue a propriedade privada nota final do curso. A aplicação consiste numa Array List desses objetos com interação CRUD com o usário, ou seja, o usuário pode criar, atualizar e deletar pessoas e alunos nessa Array List. Como a classe aluno é uma classa herdada da classe pessoa, a ArrayList está configurada para o objeto pessoa, uma vez que o uso de uma classe abstrata seria desnecessário.
 
-# Versão 1 :coffee:
+- Versão 1: versão simples de teste.
+- Versão 2: versão definitva.
+- Versão 3: versão bônus.
+
+## Versão 1 :coffee:
 
 A primeira versão é a versão mais simples do projeto final, uma vez que aceita qualquer valor para as propriedades dos objetos: pessoas e alunos. Por exemplo, a string "abc" é uma data de nascimento válida para as pessoas e para os alunos. Ela é uma versão de teste no sentido em que as funcionalidades principais, acrescentar item à lista, mostrar a lista, alterar item da lista, remover item da lista e encerrar programa, funcionam, mas não contém boas interações com o usuário.
 
-# Versão 2A :coffee:
+## Versão 2 :coffee:
 
-A segunda versão tipo A é a versão mais complexa do projeto final, uma vez que tem parâmetros para as propriedades dos objetos: pessoas e alunos. Por exemplo, a string "abc" não é mais válida para uma data de nascimento. Agora, uma data válida do calendário gregoriano precisa ser inserida no formato dd/mm/aaaa. Todos as propriedades possuem parâmetros, exceto o nome. Além disso, o usuário recebe exemplos de respostas válidas e é forçado a inserir uma resposta válida.
+A segunda versão é a versão mais complexa do projeto final, uma vez que tem parâmetros para as propriedades dos objetos: pessoas e alunos. Por exemplo, a string "abc" não é mais válida para uma data de nascimento. Agora, uma data válida do calendário gregoriano precisa ser inserida no formato dd/mm/aaaa. Todos as propriedades possuem parâmetros, exceto o nome. Além disso, o usuário recebe exemplos de respostas válidas e é forçado a inserir uma resposta válida.
 
-# Versão 2B :snake:
+## Versão 3 :snake:
 
-A segunda versão tipo B é um projeto semelhante, mas menos complexo, feito na linguagem de programação Python ao invés de Java, a linguagem estudada durante o curso. Ela é uma versão bônus e serve para mostrar outras habilidades minhas, assim como os meus outros repositórios, alguns da faculdade de Ciência da Computação (UFRGS).
+A terceira versão é uma aplicação semelhante, uma CRUD com objetos e propriedades diferentes, mas menos complexa feito na linguagem de programação Python ao invés da linguagem de programação Java, a linguagem estudada durante o curso. Ela é uma versão bônus e serve para mostrar outras habilidades minhas, assim como os meus outros repositórios, alguns sendo da faculdade de Ciência da Computação (UFRGS).
