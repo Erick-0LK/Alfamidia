@@ -1,7 +1,7 @@
 // +PraTi/Alfamídia - Projeto Final: Versão 2
 // Erick Larratéa Knoblich
 
-// A segunda versão utiliza padrões para todos os parâmetros das pessoas e dos alunos, exceto para o nome.
+// A segunda versão utiliza padrões para todos as propriedades das pessoas e dos alunos, exceto para o nome.
 // Ela é uma versão mais complexa e mais completa.
 
 import java.util.Scanner;
@@ -12,7 +12,7 @@ import java.lang.NumberFormatException;
 public class Main {
 
     // Função principal responsável por limpar o terminal e mostrar o menu, disponibilizando as opções para o usuário.
-    // Um laço é usado com um booleano que representa o fim da aplicação como parâmetro.
+    // Um laço é usado com um booleano que representa o fim da aplicação.
     // Funções auxiliares são chamadas para cada opção selecionada pelo usuário.
     public static void main(String[] args) throws Exception {
 
@@ -60,18 +60,19 @@ public class Main {
 
                     System.out.print("Resposta inválida. Por favor, tente novamente. ");
                     Thread.sleep(3000);
+                    break;
 
             }
 
         }
 
         scanner.close();
-        System.out.println("A aplicação foi encerrada.");
+        System.out.println("A aplicação foi encerrada. ");
 
     }
 
     // Função responsável por adicionar pessoas ou alunos à lista.
-    // Ela recebe informação do usuário para cada parâmetro das pessoas ou dos alunos.
+    // Ela recebe informação do usuário para cada propriedade das pessoas e dos alunos.
     // Ela pergunta se o usuário quer acrescentar uma nota final do curso.
     // A reposta para a nota final do curso determina se uma pessoa é criado ou um aluno é criado.
 
@@ -190,7 +191,7 @@ public class Main {
 
     }
 
-    // Função responsável por alterar a lista mudando os parâmetros das pessoas e dos alunos.
+    // Função responsável por alterar a lista mudando as propriedades das pessoas e dos alunos.
     // As pessoas e os alunos são alterados numa função secundária.
 
     public static void updateItemOnList(ArrayList<Person> list, Scanner scanner) throws Exception {
@@ -238,8 +239,8 @@ public class Main {
 
     }
 
-    // Função responsável por alterar os parâmetros das pessoas e dos alunos.
-    // Ela pergunta se o usário quer alterar cada um dos parâmetros.
+    // Função responsável por alterar as propriedades das pessoas e dos alunos.
+    // Ela pergunta se o usário quer alterar cada uma das propriedades.
 
     public static void updateItem(Person item, Scanner scanner) {
 
@@ -473,50 +474,54 @@ public class Main {
         try {
 
             if (date.length() == 10) {
+                
+                if (date.charAt(2) == '/' && date.charAt(5) == '/') {
 
-                int day = Integer.parseInt(date.substring(0, 2));
-                int month = Integer.parseInt(date.substring(3, 5));
-                int year = Integer.parseInt(date.substring(6, 10));
+                    int day = Integer.parseInt(date.substring(0, 2));
+                    int month = Integer.parseInt(date.substring(3, 5));
+                    int year = Integer.parseInt(date.substring(6, 10));
 
-                if (day < 1 || month < 1 || month > 12 || year < 1) {
-
-                    return false;
-
-                }
-
-                else if (month == 2 && day < 29) {
-
-                    return true;
-
-                }
-
-                else if (month == 4 || month == 6 || month == 9 || month == 11) {
-
-                    if (day < 31) {
-
-                        return true;
-
-                    }
-
-                    else {
+                    if (day < 1 || month < 1 || month > 12 || year < 1) {
 
                         return false;
 
                     }
 
-                }
-
-                else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
-
-                    if (day < 32) {
+                    else if (month == 2 && day < 29) {
 
                         return true;
 
                     }
 
-                    else {
+                    else if (month == 4 || month == 6 || month == 9 || month == 11) {
 
-                        return false;
+                        if (day < 31) {
+
+                            return true;
+
+                        }
+
+                        else {
+
+                            return false;
+
+                        }
+
+                    }
+
+                    else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+
+                        if (day < 32) {
+
+                            return true;
+
+                        }
+
+                        else {
+
+                            return false;
+
+                        }
 
                     }
 
@@ -535,6 +540,8 @@ public class Main {
                 return false;
 
             }
+
+            return false;
 
         } catch (NumberFormatException e) {
 
