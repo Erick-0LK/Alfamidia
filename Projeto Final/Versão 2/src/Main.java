@@ -7,6 +7,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import java.lang.NumberFormatException;
 
 public class Main {
@@ -17,7 +19,6 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         boolean end_application = false;
-        String user_input;
         Scanner scanner = new Scanner(System.in);
         ArrayList<Person> list = new ArrayList<>();
 
@@ -25,9 +26,15 @@ public class Main {
 
             clearTerminal();
             showMenu();
-            user_input = scanner.nextLine();
+            String user_input = scanner.nextLine();
             clearTerminal();
-            System.out.println("Opção selecionada: " + user_input + "\n");
+            System.out.println("Opção selecionada: " + user_input);
+
+            if (!user_input.equals("1")) {
+
+                System.out.println();
+                
+            }
 
             switch (user_input) {
 
@@ -78,9 +85,8 @@ public class Main {
 
     public static void addItemToList(ArrayList<Person> list, Scanner scanner) {
 
-        int index;
         String name = null, phone_number = null, birth_date = null, registration_date = null, last_update_date = null, final_grade = null;
-        String[] text = {"Exemplo de nome: Fulano Sicrano Beltrano\nInsira o nome: ",
+        String[] text = {"\nExemplo de nome: Fulano Sicrano Beltrano\nInsira o nome: ",
                          "\nExemplo de número de telefone: 5551123456789\nInsira o número de telefone: ",
                          "\nExemplo de data de nascimento: 01/01/2001\nInsira a data de nascimento: ",
                          "\nExemplo de data de cadastro: 01/01/2001\nInsira a data de cadastro: ",
@@ -88,7 +94,7 @@ public class Main {
                          "\nDesejas inserir uma nota final do curso? Sim ou não? (S/N): ",
                          "\nExemplo de nota final do curso: 0 <= x <= 10\nInsira a nota final do curso: "};
 
-        for (index = 0; index <= 4; index++) {
+        for (int index = 0; index <= 4; index++) {
 
             System.out.print(text[index]);
 
@@ -96,27 +102,27 @@ public class Main {
 
                 case 0:
 
-                    name = scanner.nextLine();
+                    name = checkProperty(text[index], scanner, "Name", 0);
                     break;
 
                 case 1:
 
-                    phone_number = checkPhoneNumber2(text[index], scanner, 0);
+                    phone_number = checkProperty(text[index], scanner, "Phone Number", 0);
                     break;
 
                 case 2:
 
-                    birth_date = checkDate2(text[index], scanner, 0);
+                    birth_date = checkProperty(text[index], scanner, "Date", 0);
                     break;
 
                 case 3:
 
-                    registration_date = checkDate2(text[index], scanner, 0);
+                    registration_date = checkProperty(text[index], scanner, "Date", 0);
                     break;
 
                 case 4:
 
-                    last_update_date = checkDate2(text[index], scanner, 0);
+                    last_update_date = checkProperty(text[index], scanner, "Date", 0);
                     break;
 
             }
@@ -134,7 +140,7 @@ public class Main {
         else {
 
             System.out.print(text[6]);
-            final_grade = checkFinalGrade2(text[6], scanner, 0);
+            final_grade = checkProperty(text[6], scanner, "Final Grade", 0);
             list.add(new Student(name, phone_number, birth_date, registration_date, last_update_date, final_grade));
 
         }
@@ -196,15 +202,13 @@ public class Main {
 
     public static void updateItemOnList(ArrayList<Person> list, Scanner scanner) throws Exception {
 
-        int index;
-
         try {
 
             if (!list.isEmpty()) {
 
                 showList(list, scanner, 1);
                 System.out.print("Insira o índice da pessoa ou do aluno que desejas alterar: ");
-                index = scanner.nextInt();
+                int index = scanner.nextInt();
                 scanner.nextLine();
 
                 if (!(index < 1 || index > list.size())) {
@@ -244,7 +248,6 @@ public class Main {
 
     public static void updateItem(Person item, Scanner scanner) {
 
-        int index;
         String[] text_1 = {"\nDesejas alterar o nome? Sim ou não? (S/N): ",
                            "\nDesejas alterar o número de telefone? Sim ou não? (S/N): ",
                            "\nDesejas alterar a data de nascimento? Sim ou não? (S/N): ",
@@ -258,7 +261,7 @@ public class Main {
                            "Exemplo de última data de alteração: 01/01/2001\nInsira a nova última data de alteração: ",
                            "Exemplo de nota final do curso: 0 <= x <= 10\nInsira a nova nota final do curso: "};
 
-        for (index = 0; index <= 4; index++) {
+        for (int index = 0; index <= 4; index++) {
 
             System.out.print(text_1[index]);
 
@@ -270,27 +273,27 @@ public class Main {
 
                     case 0:
 
-                        item.setName(scanner.nextLine());
+                        item.setName(checkProperty(text_2[index], scanner, "Name", 1));
                         break;
 
                     case 1:
 
-                        item.setPhoneNumber(checkPhoneNumber2(text_2[index], scanner, 1));
+                        item.setPhoneNumber(checkProperty(text_2[index], scanner, "Phone Number", 1));
                         break;
 
                     case 2:
 
-                        item.setBirthDate(checkDate2(text_2[index], scanner, 1));
+                        item.setBirthDate(checkProperty(text_2[index], scanner, "Date", 1));
                         break;
 
                     case 3:
 
-                        item.setRegistrationDate(checkDate2(text_2[index], scanner, 1));
+                        item.setRegistrationDate(checkProperty(text_2[index], scanner, "Date", 1));
                         break;
 
                     case 4:
 
-                        item.setLastUpdateDate(checkDate2(text_2[index], scanner, 1));
+                        item.setLastUpdateDate(checkProperty(text_2[index], scanner, "Date", 1));
                         break;
 
                 }
@@ -306,7 +309,7 @@ public class Main {
             if (yesOrNoQuestion(text_1[5], scanner) == true) {
 
                 System.out.print(text_2[5]);
-                ((Student) item).setFinalGrade(checkFinalGrade2(text_2[5], scanner, 1));
+                ((Student) item).setFinalGrade(checkProperty(text_2[5], scanner, "Final Grade", 1));
 
             }
             
@@ -319,15 +322,13 @@ public class Main {
 
     public static void removeItemOnList(ArrayList<Person> list, Scanner scanner) throws Exception {
 
-        int index;
-
         try {
 
             if (!list.isEmpty()) {
 
                 showList(list, scanner, 1);
                 System.out.print("Insira o índice da pessoa ou de aluno que desejas deletar: ");
-                index = scanner.nextInt();
+                int index = scanner.nextInt();
                 scanner.nextLine();
 
                 if (!(index < 1 || index > list.size())) {
@@ -405,52 +406,47 @@ public class Main {
 
     }
 
-    // Função responsável por determinar se o número de telefone é válido.
-    // Ele precisa ter treze dígitos e ser um número inteiro.
-    
-    public static boolean checkPhoneNumber1(String phone_number) {
+    // Função responsável por determinar se as propriedades dos objetos são válidas.
+    // Ela chama funções auxiliares para cada propriedade.
 
-        try {
-
-            if (phone_number.length() == 13) {
-
-                Long.parseLong(phone_number);
-                return true;
-
-            }
-
-            else {
-
-                return false;
-
-            }
-
-        } catch (NumberFormatException e) {
-
-            return false;
-
-        }
-
-    }
-
-    // Função responsável por forçar o usuário a inserir um número de telefone válido.
-    // Ela mantém a identação no terminal por meio do inteiro tipo.
-
-    public static String checkPhoneNumber2(String text, Scanner scanner, int type) {
+    public static String checkProperty(String text, Scanner scanner, String property, int identation) {
 
         boolean auxiliary = false;
-        String phone_number = null;
+        String user_input = null;
 
         while (auxiliary == false) {
 
-            phone_number = scanner.nextLine();
-            auxiliary = checkPhoneNumber1(phone_number);
+            user_input = scanner.nextLine();
 
+            switch (property) {
+
+                case "Name":
+
+                    auxiliary = checkName(user_input);
+                    break;
+
+                case "Phone Number":
+
+                    auxiliary = checkPhoneNumber(user_input);
+                    break;
+
+                case "Date":
+
+                    auxiliary = checkDate(user_input);
+                    break;
+
+                case "Final Grade":
+
+                    auxiliary = checkFinalGrade(user_input);
+                    break;
+
+            }
+           
             if (auxiliary == false) {
                 
                 System.out.println("Resposta inválida. Por favor, tente novamente. ");
 
-                if (type == 1) {
+                if (identation == 1) {
 
                     System.out.println();
 
@@ -462,14 +458,47 @@ public class Main {
 
         }
 
-        return phone_number;
+        return user_input;
+
+    }
+
+    // Função responsável por determinar se o nome é válido.
+    // Ele precisa não ser vazio e ter apenas espaços e letras.
+
+    public static boolean checkName(String name){
+
+        Pattern pattern = Pattern.compile("^[ A-Za-z]+$");
+        Matcher matcher = pattern.matcher(name);
+        boolean output = !name.trim().isEmpty() && matcher.matches() ? true : false;
+        return output;
+
+    }
+
+    // Função responsável por determinar se o número de telefone é válido.
+    // Ele precisa ter treze dígitos e ser um número inteiro.
+    
+    public static boolean checkPhoneNumber(String phone_number) {
+
+        try {
+
+            Long.parseLong(phone_number);
+            boolean output = phone_number.length() == 13 ? true : false;
+            return output;
+
+        } catch (NumberFormatException e) {
+
+            return false;
+
+        }
 
     }
 
     // Função responsável por determinar se a data é válida.
     // Ela precisa seguir o calendário gregoriano.
 
-    public static boolean checkDate1(String date) {
+    public static boolean checkDate(String date) {
+
+        boolean output;
 
         try {
 
@@ -481,61 +510,37 @@ public class Main {
                     int month = Integer.parseInt(date.substring(3, 5));
                     int year = Integer.parseInt(date.substring(6, 10));
 
-                    if (day < 1 || month < 1 || month > 12 || year < 1) {
+                    if (day > 0 && month > 0 && month < 13 && year > 0) {
 
-                        return false;
+                        if (month == 2) {
 
-                    }
-
-                    else if (month == 2 && day < 29) {
-
-                        return true;
-
-                    }
-
-                    else if (month == 4 || month == 6 || month == 9 || month == 11) {
-
-                        if (day < 31) {
-
-                            return true;
-
+                            if (year % 4 == 0 && year % 100 != 0 || year % 4 == 0 && year % 100 == 0 && year % 400 == 0) {
+    
+                                output = day < 30 ? true : false;
+                                return output;
+    
+                            }
+    
+                            output = day < 29 ? true : false;
+                            return output;
+    
                         }
 
-                        else {
+                        if (month == 4 || month == 6 || month == 9 || month == 11) {
 
-                            return false;
-
+                            output = day < 31 ? true : false;
+                            return output;
+    
                         }
+
+                        output = day < 32 ? true : false;
+                        return output;
 
                     }
-
-                    else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
-
-                        if (day < 32) {
-
-                            return true;
-
-                        }
-
-                        else {
-
-                            return false;
-
-                        }
-
-                    }
-
-                }
-
-                else {
 
                     return false;
 
                 }
-
-            }
-
-            else {
 
                 return false;
 
@@ -548,39 +553,6 @@ public class Main {
             return false;
 
         }
-
-    }
-
-    // Função responsável por forçar o usuário a inserir uma data válida.
-    // Ela mantém a identação no terminal por meio do inteiro tipo.
-
-    public static String checkDate2(String text, Scanner scanner, int type) {
-
-        boolean auxiliary = false;
-        String date = null;
-
-        while (auxiliary == false) {
-
-            date = scanner.nextLine();
-            auxiliary = checkDate1(date);
-
-            if (auxiliary == false) {
-                
-                System.out.println("Resposta inválida. Por favor, tente novamente. ");
-
-                if (type == 1) {
-
-                    System.out.println();
-
-                }
-
-                System.out.print(text);
-
-            } 
-
-        }
-
-        return date;
 
     }
 
@@ -588,60 +560,18 @@ public class Main {
     // Ela precisa ser um número real entre zero e dez, ambos inclusos.
     // Apenas os dois primeiros dígitos da expansão decimal são considerados na hora da exibição, com arredondamento.
 
-    public static boolean checkFinalGrade1(String final_grade) {
+    public static boolean checkFinalGrade(String final_grade) {
 
         try {
 
-            if (Float.parseFloat(final_grade) >= 0 && Float.parseFloat(final_grade) <= 10) {
-
-                return true;
-
-            }
-
-            else {
-
-                return false;
-
-            }
+            boolean output = (Float.parseFloat(final_grade) >= 0 && Float.parseFloat(final_grade) <= 10) ? true : false;
+            return output;
         
         } catch (NumberFormatException e) {
 
             return false;
 
         }
-
-    }
-
-    // Função responsável por forçar o usuário a inserir uma nota final do curso válida.
-    // Ela mantém a identação no terminal.
-
-    public static String checkFinalGrade2(String text, Scanner scanner, int type) {
-
-        boolean auxiliary = false;
-        String final_grade = null;
-
-        while (auxiliary == false) {
-
-            final_grade = scanner.nextLine();
-            auxiliary = checkFinalGrade1(final_grade);
-
-            if (auxiliary == false) {
-                
-                System.out.println("Resposta inválida. Por favor, tente novamente. ");
-
-                if (type == 1) {
-
-                    System.out.println();
-
-                }
-
-                System.out.print(text);
-
-            } 
-
-        }
-
-        return final_grade;
 
     }
 
