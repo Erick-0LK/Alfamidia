@@ -12,7 +12,7 @@ A primeira versão é a versão mais simples do projeto final, uma vez que aceit
 
 ## Versão 2 :coffee:
 
-A segunda versão é a versão mais complexa do projeto final, uma vez que tem parâmetros para as propriedades dos objetos: pessoas e alunos. Por exemplo, a string "abc" não é mais válida para uma data de nascimento. Agora, uma data válida do calendário gregoriano precisa ser inserida no formato dd/mm/aaaa. Todos as propriedades possuem parâmetros, exceto o nome. Além disso, o usuário recebe exemplos de respostas válidas e é forçado a inserir uma resposta válida.
+A segunda versão é a versão mais complexa do projeto final, uma vez que tem parâmetros para as propriedades dos objetos: pessoas e alunos. Por exemplo, a string "abc" não é mais válida para uma data de nascimento. Agora, uma data válida do calendário gregoriano precisa ser inserida no formato dd/mm/aaaa. Todos as propriedades possuem parâmetros. Além disso, o usuário recebe exemplos de respostas válidas e é forçado a inserir uma resposta válida.
 
 ## Versão 3 :snake:
 
