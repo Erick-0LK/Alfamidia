@@ -1,7 +1,7 @@
 // +PraTi/Alfamídia - Projeto Final: Versão 1
 // Erick Larratéa Knoblich
 
-// A primeira versão aceita qualquer String como válida para todos os parâmetros das pessoas e dos alunos e não contém algumas funções secundárias.
+// A primeira versão aceita qualquer string como válida para todos os parâmetros das pessoas e dos alunos e não contém algumas funções secundárias.
 // Ela é uma versão de teste rápido para checar se as funções principais funcionam.
 
 import java.util.Scanner;

@@ -1,20 +1,18 @@
 // +PraTi/Alfamídia - Projeto Final: Versão 2
 // Erick Larratéa Knoblich
 
-// A segunda versão utiliza padrões para todos as propriedades das pessoas e dos alunos, exceto para o nome.
+// A segunda versão utiliza padrões para todos as propriedades das pessoas e dos alunos.
 // Ela é uma versão mais complexa e mais completa.
 
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
-import java.lang.NumberFormatException;
+import java.util.InputMismatchException;
 
 public class Main {
 
-    // Função principal responsável por limpar o terminal e mostrar o menu, disponibilizando as opções para o usuário.
-    // Um laço é usado com um booleano que representa o fim da aplicação.
+    // Função principal responsável por limpar o terminal, mostrar o menu e lidar com as opções selecionadas pelo o usuário.
     // Funções auxiliares são chamadas para cada opção selecionada pelo usuário.
     public static void main(String[] args) throws Exception {
 
@@ -65,7 +63,8 @@ public class Main {
 
                 case "6":
 
-                    addExamplesToList(list);
+                    addExamplesToList(list, scanner);
+                    break;
 
                 default:
 
@@ -106,27 +105,27 @@ public class Main {
 
                 case 0:
 
-                    name = checkProperty(text[index], scanner, "Name", 0);
+                    name = checkProperty(text[index], scanner, "Name");
                     break;
 
                 case 1:
 
-                    phone_number = checkProperty(text[index], scanner, "Phone Number", 0);
+                    phone_number = checkProperty(text[index], scanner, "Phone Number");
                     break;
 
                 case 2:
 
-                    birth_date = checkProperty(text[index], scanner, "Date", 0);
+                    birth_date = checkProperty(text[index], scanner, "Date");
                     break;
 
                 case 3:
 
-                    registration_date = checkProperty(text[index], scanner, "Date", 0);
+                    registration_date = checkProperty(text[index], scanner, "Date");
                     break;
 
                 case 4:
 
-                    last_update_date = checkProperty(text[index], scanner, "Date", 0);
+                    last_update_date = checkProperty(text[index], scanner, "Date");
                     break;
 
             }
@@ -144,7 +143,7 @@ public class Main {
         else {
 
             System.out.print(text[6]);
-            final_grade = checkProperty(text[6], scanner, "Final Grade", 0);
+            final_grade = checkProperty(text[6], scanner, "Final Grade");
             list.add(new Student(name, phone_number, birth_date, registration_date, last_update_date, final_grade));
 
         }
@@ -152,9 +151,8 @@ public class Main {
     }
 
     // Função responsável por mostrar as pessoas e os alunos da lista na ordem em que foram acrescentados.
-    // Ela usa um índice para listar as pessoas e os alunos.
     // Ela tem um inteiro tipo, que determina se o usuário escolheu a opção dois, de apenas mostrar a lista, ou...
-    // ...se a função está sendo chamada dentro de outras, nas opções três e quatro, nas quais mudanças na lista podem ser feitas.
+    // ...se a função está sendo chamada dentro de outras, nas opções três ou quatro, nas quais mudanças na lista podem ser feitas.
 
     public static void showList(ArrayList<Person> list, Scanner scanner, int type) throws Exception {
 
@@ -201,7 +199,7 @@ public class Main {
 
     }
 
-    // Função responsável por alterar a lista mudando as propriedades das pessoas e dos alunos.
+    // Função responsável por determinar qual pessoa ou aluno da lista será alterado.
     // As pessoas e os alunos são alterados numa função secundária.
 
     public static void updateItemOnList(ArrayList<Person> list, Scanner scanner) throws Exception {
@@ -258,12 +256,15 @@ public class Main {
                            "\nDesejas alterar a data de cadastro? Sim ou não? (S/N): ",
                            "\nDesejas alterar a última data de alteração? Sim ou não? (S/N): ",
                            "\nDesejas alterar a nota final do curso? Sim ou não? (S/N): "};
-        String[] text_2 = {"Exemplo de nome: Fulano Sicrano Beltrano\nInsira o novo nome: ",
-                           "Exemplo de número de telefone: 5551123456789\nInsira o novo número de telefone: ",
-                           "Exemplo de data de nascimento: 01/01/2001\nInsira a nova data de nascimento: ",
-                           "Exemplo de data de cadastro: 01/01/2001\nInsira a nova data de cadastro: ",
-                           "Exemplo de última data de alteração: 01/01/2001\nInsira a nova última data de alteração: ",
-                           "Exemplo de nota final do curso: 0 <= x <= 10\nInsira a nova nota final do curso: "};
+        String[] text_2 = {"\nExemplo de nome: Fulano Sicrano Beltrano\nInsira o novo nome: ",
+                           "\nExemplo de número de telefone: 5551123456789\nInsira o novo número de telefone: ",
+                           "\nExemplo de data de nascimento: 01/01/2001\nInsira a nova data de nascimento: ",
+                           "\nExemplo de data de cadastro: 01/01/2001\nInsira a nova data de cadastro: ",
+                           "\nExemplo de última data de alteração: 01/01/2001\nInsira a nova última data de alteração: ",
+                           "\nExemplo de nota final do curso: 0 <= x <= 10\nInsira a nova nota final do curso: "};
+
+        clearTerminal();
+        System.out.println("Item selecionado: \n\n" + item);
 
         for (int index = 0; index <= 4; index++) {
 
@@ -277,27 +278,27 @@ public class Main {
 
                     case 0:
 
-                        item.setName(checkProperty(text_2[index], scanner, "Name", 1));
+                        item.setName(checkProperty(text_2[index], scanner, "Name"));
                         break;
 
                     case 1:
 
-                        item.setPhoneNumber(checkProperty(text_2[index], scanner, "Phone Number", 1));
+                        item.setPhoneNumber(checkProperty(text_2[index], scanner, "Phone Number"));
                         break;
 
                     case 2:
 
-                        item.setBirthDate(checkProperty(text_2[index], scanner, "Date", 1));
+                        item.setBirthDate(checkProperty(text_2[index], scanner, "Date"));
                         break;
 
                     case 3:
 
-                        item.setRegistrationDate(checkProperty(text_2[index], scanner, "Date", 1));
+                        item.setRegistrationDate(checkProperty(text_2[index], scanner, "Date"));
                         break;
 
                     case 4:
 
-                        item.setLastUpdateDate(checkProperty(text_2[index], scanner, "Date", 1));
+                        item.setLastUpdateDate(checkProperty(text_2[index], scanner, "Date"));
                         break;
 
                 }
@@ -313,7 +314,7 @@ public class Main {
             if (yesOrNoQuestion(text_1[5], scanner) == true) {
 
                 System.out.print(text_2[5]);
-                ((Student) item).setFinalGrade(checkProperty(text_2[5], scanner, "Final Grade", 1));
+                ((Student) item).setFinalGrade(checkProperty(text_2[5], scanner, "Final Grade"));
 
             }
             
@@ -369,16 +370,16 @@ public class Main {
 
     // Função responsável por adicionar dos exemplos válidos à lista, uma pessoa e um aluno.
 
-    public static void addExamplesToList(ArrayList<Person> list) throws Exception {
+    public static void addExamplesToList(ArrayList<Person> list, Scanner scanner) throws Exception {
 
         list.add(new Person("Pessoa Exemplo", "5551123456789", "01/01/2022", "01/01/2022", "01/01/2022"));
         list.add(new Student("Pessoa Exemplo", "5551123456789", "01/01/2022", "01/01/2022", "01/01/2022", "10"));
-        System.out.println("Exemplos foram adicionados à lista. ");
+        System.out.print("Exemplos foram adicionados à lista. ");
         Thread.sleep(3000);
 
     }
 
-    // Função responsável por mostratr o menu a cada iteração para o usuário.
+    // Função responsável por mostratr o menu para o usuário.
 
     public static void showMenu() {
 
@@ -393,7 +394,7 @@ public class Main {
 
     }
 
-    // Função responsável por limpar o terminal a cada iteração.
+    // Função responsável por limpar o terminal para o usuário.
 
     public static void clearTerminal() {
 
@@ -403,7 +404,7 @@ public class Main {
     }
 
     // Função responsável por lidar com as perguntas que aceitam apenas sim ou não como respostas.
-    // Ela força o usuário a inserir uma resposta válida e mantém a identação no terminal.
+    // Ela força o usuário a inserir uma resposta válida.
 
     public static boolean yesOrNoQuestion(String text, Scanner scanner) {
 
@@ -423,58 +424,52 @@ public class Main {
     }
 
     // Função responsável por determinar se as propriedades dos objetos são válidas.
+    // Ela recebe uma string proriedade, que determina qual propriedade é.
     // Ela chama funções auxiliares para cada propriedade.
 
-    public static String checkProperty(String text, Scanner scanner, String property, int identation) {
+    public static String checkProperty(String text, Scanner scanner, String property_type) {
 
-        boolean auxiliary = false;
-        String user_input = null;
+        boolean acceptance = false;
+        String property = null;
 
-        while (auxiliary == false) {
+        while (acceptance == false) {
 
-            user_input = scanner.nextLine();
+            property = scanner.nextLine();
 
-            switch (property) {
+            switch (property_type) {
 
                 case "Name":
 
-                    auxiliary = checkName(user_input);
+                    acceptance = checkName(property);
                     break;
 
                 case "Phone Number":
 
-                    auxiliary = checkPhoneNumber(user_input);
+                    acceptance = checkPhoneNumber(property);
                     break;
 
                 case "Date":
 
-                    auxiliary = checkDate(user_input);
+                    acceptance = checkDate(property);
                     break;
 
                 case "Final Grade":
 
-                    auxiliary = checkFinalGrade(user_input);
+                    acceptance = checkFinalGrade(property);
                     break;
 
             }
            
-            if (auxiliary == false) {
+            if (acceptance == false) {
                 
                 System.out.println("Resposta inválida. Por favor, tente novamente. ");
-
-                if (identation == 1) {
-
-                    System.out.println();
-
-                }
-
                 System.out.print(text);
 
             } 
 
         }
 
-        return user_input;
+        return property;
 
     }
 
@@ -513,54 +508,52 @@ public class Main {
     // Ela precisa seguir o calendário gregoriano.
 
     public static boolean checkDate(String date) {
-
-        boolean output;
-
+        
         try {
 
-            if (date.length() == 10) {
-                
-                if (date.charAt(2) == '/' && date.charAt(5) == '/') {
+            boolean output;
+            boolean test_1 = date.length() == 10;
+            boolean test_2 = date.charAt(2) == '/' && date.charAt(5) == '/';
+            int day = Integer.parseInt(date.substring(0, 2));
+            int month = Integer.parseInt(date.substring(3, 5));
+            int year = Integer.parseInt(date.substring(6, 10));
+            boolean test_3 = day > 0 && month > 0 && month < 13 && year > 0;
 
-                    int day = Integer.parseInt(date.substring(0, 2));
-                    int month = Integer.parseInt(date.substring(3, 5));
-                    int year = Integer.parseInt(date.substring(6, 10));
+            if (test_1 && test_2 && test_3) {
 
-                    if (day > 0 && month > 0 && month < 13 && year > 0) {
+                if (month == 2) {
 
-                        if (month == 2) {
+                    if (year % 4 == 0 && year % 100 != 0 || year % 4 == 0 && year % 100 == 0 && year % 400 == 0) {
 
-                            if (year % 4 == 0 && year % 100 != 0 || year % 4 == 0 && year % 100 == 0 && year % 400 == 0) {
-    
-                                output = day < 30 ? true : false;
-                                return output;
-    
-                            }
-    
-                            output = day < 29 ? true : false;
-                            return output;
-    
-                        }
-
-                        if (month == 4 || month == 6 || month == 9 || month == 11) {
-
-                            output = day < 31 ? true : false;
-                            return output;
-    
-                        }
-
-                        output = day < 32 ? true : false;
+                        output = day < 30 ? true : false;
                         return output;
 
                     }
 
+                    output = day < 29 ? true : false;
+                    return output;
+
                 }
+
+                if (month == 4 || month == 6 || month == 9 || month == 11) {
+
+                    output = day < 31 ? true : false;
+                    return output;
+
+                }
+
+                output = day < 32 ? true : false;
+                return output;
 
             }
 
             return false;
 
         } catch (NumberFormatException e) {
+
+            return false;
+
+        } catch (IndexOutOfBoundsException e) {
 
             return false;
 
