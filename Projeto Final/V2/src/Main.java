@@ -63,6 +63,10 @@ public class Main {
                     end_application = true;
                     break;
 
+                case "6":
+
+                    addExamplesToList(list);
+
                 default:
 
                     System.out.print("Resposta inválida. Por favor, tente novamente. ");
@@ -363,16 +367,28 @@ public class Main {
 
     }
 
+    // Função responsável por adicionar dos exemplos válidos à lista, uma pessoa e um aluno.
+
+    public static void addExamplesToList(ArrayList<Person> list) throws Exception {
+
+        list.add(new Person("Pessoa Exemplo", "5551123456789", "01/01/2022", "01/01/2022", "01/01/2022"));
+        list.add(new Student("Pessoa Exemplo", "5551123456789", "01/01/2022", "01/01/2022", "01/01/2022", "10"));
+        System.out.println("Exemplos foram adicionados à lista. ");
+        Thread.sleep(3000);
+
+    }
+
     // Função responsável por mostratr o menu a cada iteração para o usuário.
 
     public static void showMenu() {
 
         System.out.print("+PraTi/Alfamídia - Projeto Final: Versão 2\n\n" +
-                         "1. Criar pessoa ou aluno.\n" +
-                         "2. Mostrar pessoas e alunos criados.\n" +
-                         "3. Atualizar pessoa ou aluno.\n" +
-                         "4. Deletar uma pessoa ou aluno.\n" +
-                         "5. Encerrar programa.\n\n" +
+                         "1. Criar pessoa ou aluno e adicioná-lo à lista.\n" +
+                         "2. Mostrar lista de pessoas e alunos.\n" +
+                         "3. Atualizar pessoa ou aluno da lista.\n" +
+                         "4. Deletar uma pessoa ou aluno da lista.\n" +
+                         "5. Encerrar programa.\n" +
+                         "6. Adicionar exemplos de pessoas e alunos à lista.\n\n" +
                          "Insira sua opção: ");
 
     }

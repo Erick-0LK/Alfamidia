@@ -53,16 +53,17 @@ class Professor(Person):
 
 def showMenu():
 
-    print("SENAC TECH - PROJETO\n\n"
-          "1. Criar um elemento.\n"
-          "2. Mostrar lista de elementos.\n"
-          "3. Alterar propriedades de um elemento.\n"
-          "4. Deletar um elemento.\n"
-          "5. Encerrar aplicação.\n")
+    print("+PraTi/Alfamídia - Projeto Final: Versão 3\n\n"
+          "1. Criar uma pessoa, aluno ou professor e adicioná-lo à lista.\n"
+          "2. Mostrar lista de pessoas, alunos e professores.\n"
+          "3. Alterar propriedades de uma pessoa, aluno ou professor.\n"
+          "4. Deletar uma pessoa, aluno ou professor da lista.\n"
+          "5. Encerrar a aplicação.\n"
+          "6. Adicionar exemplos à lista.\n")
 
 # ------------------------------------------------------------------------------------------------------------
 
-def addElementToList(list):
+def addItemToList(list):
 
     texts = ["\nDesejas inserir uma nota final? Sim ou não? (S/N): ",
              "\nDesejas inserir uma matéria? Sim ou não? (S/N): "]
@@ -145,7 +146,7 @@ def updateItemOnList(list):
             os.system('cls||clear')
             index = int(user_input) - 1
             object = list[index]
-            print("Objeto selecionado:\n\n" + object.showElement())
+            print("Objeto selecionado:\n\n" + object.showObject())
 
             if yesOrNoQuestion(texts[0], 1) is True:
 
@@ -210,16 +211,32 @@ def removeItemOnList(list):
 
 # ------------------------------------------------------------------------------------------------------------
 
+def addExamplesToList(list):
+
+    list.append(Person("Pessoa Exemplo", "12345678910", "5551123456789", "01/01/2022"))
+    list.append(Student("Aluno Exemplo", "12345678910", "5551123456789", "01/01/2022", "10"))
+    list.append(Professor("Professor Exemplo", "12345678910", "5551123456789", "01/01/2022", "Programção C"))
+    
+    print("Exemplos foram adicionados. Insira qulquer valor para continuar.\n")
+    m.getch()
+
+# ------------------------------------------------------------------------------------------------------------
+
 def yesOrNoQuestion(text, identation):
 
     answer = input(text)
-    if identation == 1: print()
 
     while not (answer == "S" or answer == "N"):
+        
+        if identation == 1:
 
-        print("Resposta inválida. Por favor, tente novamente.")
+            print("\nResposta inválida. Por favor, tente novamente.")
+        
+        else:
+            
+            print("Resposta inválida. Por favor, tente novamente.")
+            
         answer = input(text)
-        if identation == 1: print()
 
     output = True if answer == "S" else False
     return output
@@ -233,30 +250,32 @@ def checkProperty(property_type):
     if property_type != "Name": print()
 
     while acceptance is False:
+        
+        match property_type:
 
-        if property_type == "Name":
+            case "Name":
 
-            acceptance, property = checkName()
+                acceptance, property = checkName()
 
-        elif property_type == "Id":
+            case "Id":
 
-            acceptance, property = checkId()
+                acceptance, property = checkId()
 
-        elif property_type == "Phone Number":
+            case "Phone Number":
 
-            acceptance, property = checkPhoneNumber()
+                acceptance, property = checkPhoneNumber()
 
-        elif property_type == "Birth Date":
+            case "Birth Date":
 
-            acceptance, property = checkBirthDate()
+                acceptance, property = checkBirthDate()
 
-        elif property_type == "Grade":
+            case "Grade":
 
-            acceptance, property = checkGrade()
+                acceptance, property = checkGrade()
 
-        else:
+            case "Course":
 
-            acceptance, property = checkCourse()
+                acceptance, property = checkCourse()
 
         if acceptance is False:
 
@@ -275,10 +294,17 @@ def checkName():
 # ------------------------------------------------------------------------------------------------------------
 
 def checkId():
-
-    id = input("Exemplo de número de CPF: 01234567890\nInsira o novo número de CPF: ")
-    acceptance = True if len(id) == 11 and id.isdigit() else False
-    return acceptance, id
+    
+    try:
+    
+        id = input("Exemplo de número de CPF: 012.345.678-90\nInsira o novo número de CPF: ")
+        test_1 = len(id) == 14
+        test_2 = id[0:3].isdigit() and id[4:7].isdigit() and id[8:11].isdigit() and id[12:14].isdigit()
+        test_3 = id[3] == "." and id[7] == "." and id[11] == "-"
+        acceptance = True if test_1 and test_2 and test_3 else False
+        return acceptance, id
+    
+    except IndexError: return False, None
 
 # ------------------------------------------------------------------------------------------------------------
 
@@ -291,40 +317,43 @@ def checkPhoneNumber():
 # ------------------------------------------------------------------------------------------------------------
 
 def checkBirthDate():
+    
+    try:
 
-    birth_date = input("Exemplo de data de aniversário: 01/01/2022\nInsira a data de aniversário: ")
+        birth_date = input("Exemplo de data de aniversário: 01/01/2022\nInsira a data de aniversário: ")
+        test_1 = len(birth_date) == 10
+        test_2 = birth_date[0:2].isdigit() and birth_date[3:5].isdigit() and birth_date[6:10].isdigit()
+        test_3 = birth_date[2] == "/" and birth_date[5] == "/"
 
-    if len(birth_date) == 10:
-        
-        if birth_date[0:2].isdigit() and birth_date[3:5].isdigit() and birth_date[6:10].isdigit():
+        if test_1 and test_2 and test_3:
 
-            if birth_date[2] == "/" and birth_date[5] == "/":
+            day = int(birth_date[0:2])
+            month = int(birth_date[3:5])
+            year = int(birth_date[6:10])
 
-                day = int(birth_date[0:2])
-                month = int(birth_date[3:5])
-                year = int(birth_date[6:10])
+            if day > 0 and month > 0 and month < 13 and year > 0:
 
-                if day > 0 and month > 0 and month < 13 and year > 0:
+                if month == 4 or month == 6 or month == 9 or month == 11:
 
-                    if month == 4 or month == 6 or month == 9 or month == 11:
-
-                        acceptance = True if day < 31 else False
-                        return acceptance, birth_date
-
-                    if month == 2:
-
-                        if year % 4 == 0 and year % 100 != 0 or year % 4 == 0 and year % 100 == 0 and year % 400 == 0:
-
-                            acceptance = True if day < 30 else False
-                            return acceptance, birth_date
-
-                        acceptance = True if day < 29 else False
-                        return acceptance, birth_date
-
-                    acceptance = True if day < 32 else False
+                    acceptance = True if day < 31 else False
                     return acceptance, birth_date
 
-    return False, None
+                if month == 2:
+
+                    if year % 4 == 0 and year % 100 != 0 or year % 4 == 0 and year % 100 == 0 and year % 400 == 0:
+
+                        acceptance = True if day < 30 else False
+                        return acceptance, birth_date
+
+                    acceptance = True if day < 29 else False
+                    return acceptance, birth_date
+
+                acceptance = True if day < 32 else False
+                return acceptance, birth_date
+
+        return False, None
+    
+    except IndexError: return False, None
 
 # ------------------------------------------------------------------------------------------------------------
 
@@ -351,10 +380,16 @@ def checkCourse():
                   "6. Programação Haskell\n\n"
                   "Insira o valor: ")
 
-    if not index.isdigit() or int(index) < 1 or int(index) > 6: return False, None
+    if not index.isdigit() or int(index) < 1 or int(index) > 6:
+        
+        return False, None
 
-    map = {"1" : "Programação C", "2" : "Programação C++", "3" : "Programação C#",
-           "4" : "Programção Python", "5" : "Programação Java", "6" : "Programação Haskell"}
+    map = {"1" : "Programação C",
+           "2" : "Programação C++",
+           "3" : "Programação C#",
+           "4" : "Programção Python",
+           "5" : "Programação Java",
+           "6" : "Programação Haskell"}
 
     return True, map[index]
 
@@ -363,42 +398,43 @@ def checkCourse():
 end_application = False
 list = []
 
-list.append(Person("Person", "11111111111", "1111111111111", "01/01/2000"))
-list.append(Student("Student", "11111111111", "1111111111111", "01/01/2000", "10"))
-list.append(Professor("Professor", "11111111111", "1111111111111", "01/01/2000", "Programação C#"))
-list.append(Student("Student", "11111111111", "1111111111111", "01/01/2000", "5.2"))
-
-while end_application == False:
+while end_application is False:
 
     os.system('cls||clear')
     showMenu()
     user_input = input("Insira a sua opção: ")
     os.system('cls||clear')
-    print("\nOpção selecionada: " + user_input + "\n")
+    print("Opção selecionada: " + user_input + "\n")
 
-    if user_input == "1":
+    match user_input:
 
-        addElementToList(list)
+        case "1":
+            
+            addItemToList(list)
 
-    elif user_input == "2":
+        case "2":
+            
+            showList(list, 0)
 
-        showList(list, 0)
+        case "3":
+            
+            updateItemOnList(list)
 
-    elif user_input == "3":
+        case "4":
+            
+            removeItemOnList(list)
 
-        updateItemOnList(list)
+        case "5":
+            
+            end_application = True
 
-    elif user_input == "4":
+        case "6":
+            
+            addExamplesToList(list)
 
-        removeItemOnList(list)
+        case other:
 
-    elif user_input == "5":
-
-        end_application = True
-
-    else:
-
-        print("Opção inválida. Insira qualquer valor para continuar.\n")
-        m.getch()
+            print("Opção inválida. Insira qualquer valor para continuar.\n")
+            m.getch()
 
 print("A aplicação foi encerrada.")
