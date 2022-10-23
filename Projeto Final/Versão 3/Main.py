@@ -287,7 +287,7 @@ def checkProperty(property_type):
 
 def checkName():
 
-    name = input("Exemplo de nome: Fulano Sicrano Beltrano\nInsira nome: ")
+    name = input("Exemplo de nome: Fulano Sicrano Beltrano\nInsira o nome: ")
     acceptance = True if bool(re.match('[a-zA-Z\s]+$', name)) is True and not name.isspace() else False
     return acceptance, name
 
@@ -297,7 +297,7 @@ def checkId():
     
     try:
     
-        id = input("Exemplo de número de CPF: 012.345.678-90\nInsira o novo número de CPF: ")
+        id = input("Exemplo de número de CPF: 012.345.678-90\nInsira o número de CPF: ")
         test_1 = len(id) == 14
         test_2 = id[0:3].isdigit() and id[4:7].isdigit() and id[8:11].isdigit() and id[12:14].isdigit()
         test_3 = id[3] == "." and id[7] == "." and id[11] == "-"
