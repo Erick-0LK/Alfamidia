@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.InputMismatchException;
+import java.time.LocalDate;
 
 public class Main {
 
@@ -93,11 +94,10 @@ public class Main {
                          "\nExemplo de número de telefone: 5551123456789\nInsira o número de telefone: ",
                          "\nExemplo de data de nascimento: 01/01/2001\nInsira a data de nascimento: ",
                          "\nExemplo de data de cadastro: 01/01/2001\nInsira a data de cadastro: ",
-                         "\nExemplo de última data de alteração: 01/01/2001\nInsira a data da última alteração: ",
                          "\nDesejas inserir uma nota final do curso? Sim ou não? (S/N): ",
                          "\nExemplo de nota final do curso: 0 <= x <= 10\nInsira a nota final do curso: "};
 
-        for (int index = 0; index <= 4; index++) {
+        for (int index = 0; index < 4; index++) {
 
             System.out.print(text[index]);
 
@@ -123,18 +123,14 @@ public class Main {
                     registration_date = checkProperty(text[index], scanner, "Date");
                     break;
 
-                case 4:
-
-                    last_update_date = checkProperty(text[index], scanner, "Date");
-                    break;
-
             }
 
         }
 
-        System.out.print(text[5]);
+        last_update_date = convertDate(LocalDate.now());
+        System.out.print(text[4]);
 
-        if (yesOrNoQuestion(text[5], scanner) == false) {
+        if (yesOrNoQuestion(text[4], scanner) == false) {
 
             list.add(new Person(name, phone_number, birth_date, registration_date, last_update_date));
 
@@ -142,8 +138,8 @@ public class Main {
 
         else {
 
-            System.out.print(text[6]);
-            final_grade = checkProperty(text[6], scanner, "Final Grade");
+            System.out.print(text[5]);
+            final_grade = checkProperty(text[5], scanner, "Final Grade");
             list.add(new Student(name, phone_number, birth_date, registration_date, last_update_date, final_grade));
 
         }
@@ -254,19 +250,17 @@ public class Main {
                            "\nDesejas alterar o número de telefone? Sim ou não? (S/N): ",
                            "\nDesejas alterar a data de nascimento? Sim ou não? (S/N): ",
                            "\nDesejas alterar a data de cadastro? Sim ou não? (S/N): ",
-                           "\nDesejas alterar a última data de alteração? Sim ou não? (S/N): ",
                            "\nDesejas alterar a nota final do curso? Sim ou não? (S/N): "};
         String[] text_2 = {"\nExemplo de nome: Fulano Sicrano Beltrano\nInsira o novo nome: ",
                            "\nExemplo de número de telefone: 5551123456789\nInsira o novo número de telefone: ",
                            "\nExemplo de data de nascimento: 01/01/2001\nInsira a nova data de nascimento: ",
                            "\nExemplo de data de cadastro: 01/01/2001\nInsira a nova data de cadastro: ",
-                           "\nExemplo de última data de alteração: 01/01/2001\nInsira a nova última data de alteração: ",
                            "\nExemplo de nota final do curso: 0 <= x <= 10\nInsira a nova nota final do curso: "};
 
         clearTerminal();
         System.out.println("Item selecionado: \n\n" + item);
 
-        for (int index = 0; index <= 4; index++) {
+        for (int index = 0; index < 4; index++) {
 
             System.out.print(text_1[index]);
 
@@ -296,25 +290,22 @@ public class Main {
                         item.setRegistrationDate(checkProperty(text_2[index], scanner, "Date"));
                         break;
 
-                    case 4:
-
-                        item.setLastUpdateDate(checkProperty(text_2[index], scanner, "Date"));
-                        break;
-
                 }
 
             }
 
         }
 
+        item.setLastUpdateDate(convertDate(LocalDate.now()));
+
         if (item instanceof Student) {
 
-            System.out.print(text_1[5]);
+            System.out.print(text_1[4]);
 
-            if (yesOrNoQuestion(text_1[5], scanner) == true) {
+            if (yesOrNoQuestion(text_1[4], scanner) == true) {
 
-                System.out.print(text_2[5]);
-                ((Student) item).setFinalGrade(checkProperty(text_2[5], scanner, "Final Grade"));
+                System.out.print(text_2[4]);
+                ((Student) item).setFinalGrade(checkProperty(text_2[4], scanner, "Final Grade"));
 
             }
             
@@ -558,6 +549,18 @@ public class Main {
             return false;
 
         }
+
+    }
+
+    // Função responsável por converter a data atual para o formato dia/mês/ano.
+
+    public static String convertDate(LocalDate current_date) {
+
+        String date = current_date.toString();
+        String day = date.substring(8, 10);
+        String month = date.substring(5, 7);
+        String year = date.substring(0, 4);
+        return day + "/" + month + "/" + year;
 
     }
 
