@@ -1,5 +1,3 @@
-import java.text.DecimalFormat;
-
 public class Student extends Person{
 
     private String final_grade;
@@ -23,10 +21,10 @@ public class Student extends Person{
         
     }
 
+    @Override
     public String toString() {
 
-        DecimalFormat decimal_format = new DecimalFormat("#.##");
-        return super.toString() + "\nNota final do curso: " + decimal_format.format(Float.parseFloat(this.final_grade));
+        return super.toString() + "\nNota final do curso: " + this.final_grade;
 
     }
 
