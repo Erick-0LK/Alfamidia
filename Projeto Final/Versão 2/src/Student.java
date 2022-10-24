@@ -23,6 +23,7 @@ public class Student extends Person {
         
     }
 
+    @Override
     public String toString() {
 
         DecimalFormat decimal_format = new DecimalFormat("#.##");
