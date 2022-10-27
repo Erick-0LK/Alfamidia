@@ -1,4 +1,4 @@
-# +PraTi/Alfamídia - Repositório
+# :coffee: +PraTi/Alfamídia: Desenvolvedor Java
 
 Este repositório contém o projeto final proposto para a incubação mais dois jogos simples no terminal: a minha versão do jogo feito pelo professor Rodrigo durante o curso semelhante à batalha naval e o jogo da velha feito por mim.
 
