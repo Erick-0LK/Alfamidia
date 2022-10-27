@@ -20,7 +20,7 @@ public class Grid {
 
     }
 
-    public boolean checkPlay(String play, String turn) {
+    public boolean checkPlay(String play, String turn, String player_symbol, String enemy_symbol) {
 
         if (turn.equals("Player")) {
 
@@ -41,7 +41,7 @@ public class Grid {
 
                 }
 
-                this.indexes[row - 1][column - 1] = 'X';
+                this.indexes[row - 1][column - 1] = player_symbol.charAt(0);
                 return true;
 
             } catch (IndexOutOfBoundsException error) {
@@ -67,61 +67,101 @@ public class Grid {
 
             }
 
-            this.indexes[row][column] = '0';
+            this.indexes[row][column] = enemy_symbol.charAt(0);;
             return true;
 
         }
 
     }
 
-    public String checkWinner() {
-        
-        if (this.indexes[0][0] == 'X' && this.indexes[0][1] == 'X' && this.indexes[0][2] == 'X'
-            ||
-            this.indexes[1][0] == 'X' && this.indexes[1][1] == 'X' && this.indexes[1][2] == 'X'
-            ||
-            this.indexes[2][0] == 'X' && this.indexes[2][1] == 'X' && this.indexes[2][2] == 'X'
-            ||
-            this.indexes[0][0] == 'X' && this.indexes[1][0] == 'X' && this.indexes[2][0] == 'X'
-            ||
-            this.indexes[0][1] == 'X' && this.indexes[1][1] == 'X' && this.indexes[2][1] == 'X'
-            ||
-            this.indexes[0][2] == 'X' && this.indexes[1][2] == 'X' && this.indexes[2][2] == 'X'
-            ||
-            this.indexes[0][0] == 'X' && this.indexes[1][1] == 'X' && this.indexes[2][2] == 'X'
-            ||
-            this.indexes[2][0] == 'X' && this.indexes[1][1] == 'X' && this.indexes[0][2] == 'X')
-            
-            {
-            
-            return "Player"; 
+    public String checkWinner(String player_symbol, String enemy_symbol) {
+
+        String winner = "";
+
+        for (int row = 0; row <= 2; row++) {
+
+            for (int column = 0; column <= 2; column++) {
+
+                winner += this.indexes[row][column];
+
+            }
+
+            if (!determineWinner(winner, player_symbol, enemy_symbol).equals("Tie")) {
+
+                return determineWinner(winner, player_symbol, enemy_symbol);
+
+            }
+
+            winner = "";
 
         }
 
-        if (this.indexes[0][0] == '0' && this.indexes[0][1] == '0' && this.indexes[0][2] == '0'
-            ||
-            this.indexes[1][0] == '0' && this.indexes[1][1] == '0' && this.indexes[1][2] == '0'
-            ||
-            this.indexes[2][0] == '0' && this.indexes[2][1] == '0' && this.indexes[2][2] == '0'
-            ||
-            this.indexes[0][0] == '0' && this.indexes[1][0] == '0' && this.indexes[2][0] == '0'
-            ||
-            this.indexes[0][1] == '0' && this.indexes[1][1] == '0' && this.indexes[2][1] == '0'
-            ||
-            this.indexes[0][2] == '0' && this.indexes[1][2] == '0' && this.indexes[2][2] == '0'
-            ||
-            this.indexes[0][0] == '0' && this.indexes[1][1] == '0' && this.indexes[2][2] == '0'
-            ||
-            this.indexes[2][0] == '0' && this.indexes[1][1] == '0' && this.indexes[0][2] == '0')
+        for (int column = 0; column <= 2; column++) {
 
-            {
+            for (int row = 0; row <= 2; row++) {
 
-            return "Enemy";
+                winner += this.indexes[row][column];
 
+            }
+
+            if (!determineWinner(winner, player_symbol, enemy_symbol).equals("Tie")) {
+
+                return determineWinner(winner, player_symbol, enemy_symbol);
+
+            }
+
+            winner = "";
+
+        }
+
+        for (int row = 0, column = 0; row <= 2; row++, column++) {
+
+            winner += this.indexes[row][column];
+
+            if (winner.length() == 3 && !determineWinner(winner, player_symbol, enemy_symbol).equals("Tie")) {
+
+               return determineWinner(winner, player_symbol, enemy_symbol);
+
+            }
+
+        }
+
+        winner = "";
+
+        for (int row = 0, column = 2; column >= 0; row++, column--) {
+
+            winner += this.indexes[row][column];
+
+            if (winner.length() == 3 && !determineWinner(winner, player_symbol, enemy_symbol).equals("Tie")) {
+
+               return determineWinner(winner, player_symbol, enemy_symbol);
+
+            }
+            
         }
 
         return "Tie";
 
+    }
+
+    public String determineWinner(String winner, String player_symbol, String enemy_symbol) {
+
+        switch (winner) {
+
+            case "XXX":
+                
+                return player_symbol.equals("X") ? "Player" : "Enemy";
+
+            case "000":
+
+                return enemy_symbol.equals("0") ? "Enemy" : "Player";
+
+            default:
+
+                return  "Tie";
+
+        }
+        
     }
 
 }

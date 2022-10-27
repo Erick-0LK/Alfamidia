@@ -4,21 +4,35 @@ public class Main {
     public static void main(String[] args) {
 
         boolean end_game;
-        Grid grid = new Grid(new char[][] {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}});
         Scanner scanner = new Scanner(System.in);
+        String player_symbol = determinePlayerSymbol(scanner);
+        Grid grid = new Grid(new char[][] {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}});
 
-        do{
+        while (true) {
 
+            String enemy_symbol = player_symbol.equals("X") ? "0" : "X";
             int turns = 0;
 
             while (true) {
 
                 clearTerminal();
                 System.out.println("Tic-Tac-Toe Game - Java Application\n");
-                grid.showGrid();
-                playerTurn(scanner, grid);
 
-                if (!grid.checkWinner().equals("Tie")) {
+                if (player_symbol.equals("X")) {
+
+                    grid.showGrid();
+                    playerTurn(scanner, grid, "X", "0");
+
+                }
+
+                else {
+
+                    enemyTurn(grid, "0", "X");
+                    grid.showGrid();
+
+                }
+
+                if (!grid.checkWinner(player_symbol, enemy_symbol).equals("Tie")) {
 
                     break;
 
@@ -32,9 +46,20 @@ public class Main {
 
                 }
 
-                enemyTurn(grid);
+                if (player_symbol.equals("X")) {
+                    
+                    enemyTurn(grid, "X", "0");
+                    grid.showGrid();
 
-                if (!grid.checkWinner().equals("Tie")) {
+                }
+
+                else {
+
+                    playerTurn(scanner, grid, "0", "X");
+
+                }
+
+                if (!grid.checkWinner(player_symbol, enemy_symbol).equals("Tie")) {
 
                     break;
 
@@ -46,13 +71,13 @@ public class Main {
             System.out.println("Tic-Tac-Toe Game - Java Application\n");
             grid.showGrid();
 
-            if (grid.checkWinner().equals("Player")) {
+            if (grid.checkWinner(player_symbol, enemy_symbol).equals("Player")) {
 
                 System.out.println("\nCongratulations! You won!");
 
             }
 
-            else if (grid.checkWinner().equals("Enemy")) {
+            else if (grid.checkWinner(player_symbol, enemy_symbol).equals("Enemy")) {
 
                 System.out.println("\nYou lost! Better luck next time!");
 
@@ -64,10 +89,22 @@ public class Main {
 
             }
 
-           end_game = yesOrNoQuestion(scanner);
-           grid = new Grid(new char[][] {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}});
+            end_game = yesOrNoQuestion(scanner, grid);
+            grid = new Grid(new char[][] {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}});
 
-        } while (end_game == false);
+            if (end_game == false) {
+
+                player_symbol = determinePlayerSymbol(scanner);
+
+            }
+
+            else if (end_game == true) {
+                
+                break;
+
+            }
+
+        }
 
         clearTerminal();
         System.out.println("The application has ended.");
@@ -75,23 +112,16 @@ public class Main {
 
     }
 
-    public static void clearTerminal() {
-
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-
-    }
-
-    public static void playerTurn(Scanner scanner, Grid grid) {
+    public static void playerTurn(Scanner scanner, Grid grid, String player_symbol, String enemy_symbol) {
 
         boolean acceptance;
         String play;
         System.out.print("\nInput row,column: ");
         play = scanner.nextLine();
 
-        do{
+        do {
             
-            acceptance = grid.checkPlay(play, "Player");
+            acceptance = grid.checkPlay(play, "Player", player_symbol, enemy_symbol);
 
             if (acceptance == false) {
 
@@ -108,19 +138,19 @@ public class Main {
 
     }
 
-    public static void enemyTurn(Grid grid) {
+    public static void enemyTurn(Grid grid, String player_symbol, String enemy_symbol) {
 
         boolean acceptance;
 
         do{
             
-            acceptance = grid.checkPlay("", "Enemy");
+            acceptance = grid.checkPlay("", "Enemy", player_symbol, enemy_symbol);
 
         } while (acceptance == false);
 
     }
 
-    public static boolean yesOrNoQuestion(Scanner scanner) {
+    public static boolean yesOrNoQuestion(Scanner scanner, Grid grid) {
 
         String answer;
 
@@ -131,13 +161,59 @@ public class Main {
 
             if (!(answer.equals("Y") || answer.equals("N"))) {
                 
-                System.out.println("Invalid answer. Please try again.");
+                clearTerminal();
+                System.out.println("Tic-Tac-Toe Game - Java Application\n");
+                grid.showGrid();
+                System.out.println("\nInvalid answer. Please try again.");
 
             }
 
         } while (!(answer.equals("Y") || answer.equals("N")));
 
         return answer.equals("Y") ? false : true;
+
+    }
+
+    public static String determinePlayerSymbol(Scanner scanner) {
+
+        String user_input;
+        clearTerminal();
+        System.out.print("Tic-Tac-Toe Game - Java Application\n\n1. Play as X\n2. Play as 0");
+        
+        do {
+
+            System.out.print("\n\nInput: ");
+            user_input = scanner.nextLine();
+            clearTerminal();
+
+            switch (user_input) {
+
+                case "1":
+
+                    return "X";
+
+                case "2":
+
+                    return "0";
+
+                default:
+
+                    System.out.print("Tic-Tac-Toe Game - Java Application\n\n1. Play as X\n2. Play as 0\n\nInput: " + user_input);
+                    System.out.print("\n\nInvalid input. Please try again.");
+                    break;
+                    
+            }
+
+        } while (!user_input.equals("1") || !user_input.equals("2"));
+
+        return "";
+
+    }
+
+    public static void clearTerminal() {
+
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
 
     }
 
