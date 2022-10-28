@@ -1,20 +1,23 @@
 public class Functionality {
 
-    public int x, y, z, w;
+    public int rows;
+    public int columns;
+    public int number_of_enemies;
+    public int number_of_tries;
     public int[][] map;
     public int[][] enemies;
     public String[] symbols = { ".", "X", "*" };
-    public boolean end;
+    public boolean cheat;
 
-    public Functionality(int x, int y) {
+    public Functionality(int rows, int columns, boolean cheat) {
 
-        this.x = x;
-        this.y = x;
-        this.z = 15;
-        this.w = 5;
-        this.map = new int[x][y];
-        this.enemies = new int[x][y];
-        this.end = false;
+        this.rows = rows;
+        this.columns = rows;
+        this.number_of_enemies = 5;
+        this.number_of_tries = 10;
+        this.map = new int[rows][columns];
+        this.enemies = new int[rows][columns];
+        this.cheat = cheat;
 
     }
 
@@ -22,11 +25,11 @@ public class Functionality {
 
         int i, j;
 
-        for (i = 0; i < this.x; i++) {
+        for (i = 0; i < this.rows; i++) {
 
             System.out.println();
 
-            for (j = 0; j < this.y; j++) {
+            for (j = 0; j < this.columns; j++) {
 
                 System.out.print(this.symbols[this.map[i][j]] + " ");
 
@@ -39,7 +42,7 @@ public class Functionality {
 
     }
 
-    public void Enemies(int x, int y, int a, int b) {
+    public void determineEnemyPositions(int x, int y, int rows, int columns) {
 
         if (this.enemies[x][y] == 0) {
 
@@ -49,23 +52,23 @@ public class Functionality {
 
         else {
 
-            x = (int) Math.floor(Math.random() * a);
-            y = (int) Math.floor(Math.random() * b);
-            this.Enemies(x, y, a, b);
+            x = (int) Math.floor(Math.random() * rows);
+            y = (int) Math.floor(Math.random() * columns);
+            this.determineEnemyPositions(x, y, rows, columns);
 
         }
 
     }
 
-    public void Action(int x, int y) {
+    public void playerAction(int x, int y) {
 
-        this.z--;
+        this.number_of_tries--;
 
         if (this.enemies[x][y] == 1) {
 
             this.map[x][y] = 1;
             this.enemies[x][y] = -1;
-            this.w--;
+            this.number_of_enemies--;
 
         }
 
@@ -75,21 +78,15 @@ public class Functionality {
 
         }
 
-        if (this.w == 0 || this.z == 0) {
-
-            this.end = true;
-
-        }
-
     }
 
     public int nearestTarget(int x, int y) {
 
         int nearest = 100, i, j;
 
-        for (i = 0; i < this.x; i++) {
+        for (i = 0; i < this.rows; i++) {
 
-            for (j = 0; j < this.y; j++) {
+            for (j = 0; j < this.columns; j++) {
 
                 if (this.enemies[i][j] == 1) {
 

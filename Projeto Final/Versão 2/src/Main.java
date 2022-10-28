@@ -409,8 +409,7 @@ public class Main {
 
         }
 
-        boolean output = answer.equals("S") ? true : false;
-        return output;
+        return answer.equals("S") ? true : false;
 
     }
 
@@ -471,8 +470,7 @@ public class Main {
 
         Pattern pattern = Pattern.compile("^[ A-Za-z]+$");
         Matcher matcher = pattern.matcher(name);
-        boolean output = !name.trim().isEmpty() && matcher.matches() ? true : false;
-        return output;
+        return !name.trim().isEmpty() && matcher.matches() ? true : false;
 
     }
 
@@ -484,8 +482,7 @@ public class Main {
         try {
 
             Long.parseLong(phone_number);
-            boolean output = phone_number.length() == 13 ? true : false;
-            return output;
+            return phone_number.length() == 13 ? true : false;
 
         } catch (NumberFormatException e) {
 
@@ -502,7 +499,6 @@ public class Main {
         
         try {
 
-            boolean output;
             boolean test_1 = date.length() == 10;
             boolean test_2 = date.charAt(2) == '/' && date.charAt(5) == '/';
             int day = Integer.parseInt(date.substring(0, 2));
@@ -516,25 +512,21 @@ public class Main {
 
                     if (year % 4 == 0 && year % 100 != 0 || year % 4 == 0 && year % 100 == 0 && year % 400 == 0) {
 
-                        output = day < 30 ? true : false;
-                        return output;
+                        return day < 30 ? true : false;
 
                     }
 
-                    output = day < 29 ? true : false;
-                    return output;
+                    return day < 29 ? true : false;
 
                 }
 
                 if (month == 4 || month == 6 || month == 9 || month == 11) {
 
-                    output = day < 31 ? true : false;
-                    return output;
+                    return day < 31 ? true : false;
 
                 }
 
-                output = day < 32 ? true : false;
-                return output;
+                return day < 32 ? true : false;
 
             }
 
@@ -572,8 +564,7 @@ public class Main {
 
         try {
 
-            boolean output = (Float.parseFloat(final_grade) >= 0 && Float.parseFloat(final_grade) <= 10) ? true : false;
-            return output;
+            return Float.parseFloat(final_grade) >= 0 && Float.parseFloat(final_grade) <= 10 ? true : false;
         
         } catch (NumberFormatException e) {
 
