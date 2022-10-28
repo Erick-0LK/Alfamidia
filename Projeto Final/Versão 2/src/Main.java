@@ -69,7 +69,7 @@ public class Main {
 
                 default:
 
-                    System.out.print("Resposta inválida. Por favor, tente novamente. ");
+                    System.out.print("Opção inválida. Por favor, tente novamente. ");
                     Thread.sleep(3000);
                     break;
 
@@ -105,22 +105,22 @@ public class Main {
 
                 case 0:
 
-                    name = checkProperty(text[index], scanner, "Name");
+                    name = checkName(text[index], scanner);
                     break;
 
                 case 1:
 
-                    phone_number = checkProperty(text[index], scanner, "Phone Number");
+                    phone_number = checkPhoneNumber(text[index], scanner);
                     break;
 
                 case 2:
 
-                    birth_date = checkProperty(text[index], scanner, "Date");
+                    birth_date = checkDate(text[index], scanner);
                     break;
 
                 case 3:
 
-                    registration_date = checkProperty(text[index], scanner, "Date");
+                    registration_date = checkDate(text[index], scanner);
                     break;
 
             }
@@ -139,7 +139,7 @@ public class Main {
         else {
 
             System.out.print(text[5]);
-            final_grade = checkProperty(text[5], scanner, "Final Grade");
+            final_grade = checkFinalGrade(text[5], scanner);
             list.add(new Student(name, phone_number, birth_date, registration_date, last_update_date, final_grade));
 
         }
@@ -272,22 +272,22 @@ public class Main {
 
                     case 0:
 
-                        item.setName(checkProperty(text_2[index], scanner, "Name"));
+                        item.setName(checkName(text_2[index], scanner));
                         break;
 
                     case 1:
 
-                        item.setPhoneNumber(checkProperty(text_2[index], scanner, "Phone Number"));
+                        item.setPhoneNumber(checkPhoneNumber(text_2[index], scanner));
                         break;
 
                     case 2:
 
-                        item.setBirthDate(checkProperty(text_2[index], scanner, "Date"));
+                        item.setBirthDate(checkDate(text_2[index], scanner));
                         break;
 
                     case 3:
 
-                        item.setRegistrationDate(checkProperty(text_2[index], scanner, "Date"));
+                        item.setRegistrationDate(checkDate(text_2[index], scanner));
                         break;
 
                 }
@@ -305,7 +305,7 @@ public class Main {
             if (yesOrNoQuestion(text_1[4], scanner) == true) {
 
                 System.out.print(text_2[4]);
-                ((Student) item).setFinalGrade(checkProperty(text_2[4], scanner, "Final Grade"));
+                ((Student) item).setFinalGrade(checkFinalGrade(text_2[4], scanner));
 
             }
             
@@ -385,160 +385,102 @@ public class Main {
 
     }
 
-    // Função responsável por limpar o terminal para o usuário.
+    // Função responsável por determinar se o nome é válido: ele precisa não ser vazio e ter apenas espaços e letras.
 
-    public static void clearTerminal() {
+    public static String checkName(String text, Scanner scanner){
 
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-
-    }
-
-    // Função responsável por lidar com as perguntas que aceitam apenas sim ou não como respostas.
-    // Ela força o usuário a inserir uma resposta válida.
-
-    public static boolean yesOrNoQuestion(String text, Scanner scanner) {
-
-        String answer = scanner.nextLine();
-
-        while (!(answer.equals("S") || answer.equals("N"))) {
-
-            System.out.println("Resposta inválida. Por favor, tente novamente. ");
-            System.out.print(text);
-            answer = scanner.nextLine();
-
-        }
-
-        return answer.equals("S") ? true : false;
-
-    }
-
-    // Função responsável por determinar se as propriedades dos objetos são válidas.
-    // Ela recebe uma string proriedade, que determina qual propriedade é.
-    // Ela chama funções auxiliares para cada propriedade.
-
-    public static String checkProperty(String text, Scanner scanner, String property_type) {
-
-        boolean acceptance = false;
-        String property = null;
-
-        while (acceptance == false) {
-
-            property = scanner.nextLine();
-
-            switch (property_type) {
-
-                case "Name":
-
-                    acceptance = checkName(property);
-                    break;
-
-                case "Phone Number":
-
-                    acceptance = checkPhoneNumber(property);
-                    break;
-
-                case "Date":
-
-                    acceptance = checkDate(property);
-                    break;
-
-                case "Final Grade":
-
-                    acceptance = checkFinalGrade(property);
-                    break;
-
-            }
-           
-            if (acceptance == false) {
-                
-                System.out.println("Resposta inválida. Por favor, tente novamente. ");
-                System.out.print(text);
-
-            } 
-
-        }
-
-        return property;
-
-    }
-
-    // Função responsável por determinar se o nome é válido.
-    // Ele precisa não ser vazio e ter apenas espaços e letras.
-
-    public static boolean checkName(String name){
-
+        String name = scanner.nextLine();
         Pattern pattern = Pattern.compile("^[ A-Za-z]+$");
         Matcher matcher = pattern.matcher(name);
-        return !name.trim().isEmpty() && matcher.matches() ? true : false;
 
-    }
+        if (!name.trim().isEmpty() && matcher.matches()) {
 
-    // Função responsável por determinar se o número de telefone é válido.
-    // Ele precisa ter treze dígitos e ser um número inteiro.
-    
-    public static boolean checkPhoneNumber(String phone_number) {
-
-        try {
-
-            Long.parseLong(phone_number);
-            return phone_number.length() == 13 ? true : false;
-
-        } catch (NumberFormatException e) {
-
-            return false;
+            return name;
 
         }
 
+        System.out.print("Nome inválido. Por favor, tente novamente.\n" + text);
+        return checkName(text, scanner);
+
     }
 
-    // Função responsável por determinar se a data é válida.
-    // Ela precisa seguir o calendário gregoriano.
+    // Função responsável por determinar se o número de telefone é válido: ele precisa ter treze dígitos e ser um número inteiro.
+    
+    public static String checkPhoneNumber(String text, Scanner scanner) {
 
-    public static boolean checkDate(String date) {
+        String phone_number = scanner.nextLine();
         
         try {
 
-            boolean test_1 = date.length() == 10;
-            boolean test_2 = date.charAt(2) == '/' && date.charAt(5) == '/';
-            int day = Integer.parseInt(date.substring(0, 2));
-            int month = Integer.parseInt(date.substring(3, 5));
-            int year = Integer.parseInt(date.substring(6, 10));
-            boolean test_3 = day > 0 && month > 0 && month < 13 && year > 0;
+            Long.parseLong(phone_number);
 
-            if (test_1 && test_2 && test_3) {
+            if (phone_number.length() == 13) {
 
-                if (month == 2) {
-
-                    if (year % 4 == 0 && year % 100 != 0 || year % 4 == 0 && year % 100 == 0 && year % 400 == 0) {
-
-                        return day < 30 ? true : false;
-
-                    }
-
-                    return day < 29 ? true : false;
-
-                }
-
-                if (month == 4 || month == 6 || month == 9 || month == 11) {
-
-                    return day < 31 ? true : false;
-
-                }
-
-                return day < 32 ? true : false;
+                return phone_number;
 
             }
 
-            return false;
+            System.out.print("Número de telefone inválido. Por favor, tente novamente.\n" + text);
+            return checkPhoneNumber(text, scanner);
 
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException error) {
 
-            return false;
+            System.out.print("Número de telefone inválido. Por favor, tente novamente.\n" + text);
+            return checkPhoneNumber(text, scanner);
 
-        } catch (IndexOutOfBoundsException e) {
+        }
 
-            return false;
+    }
+
+    // Função responsável por determinar se a data é válida: ela precisa seguir o calendário gregoriano.
+
+    public static String checkDate(String text, Scanner scanner) {
+        
+        String date = scanner.nextLine();
+
+        try {
+
+            int day = Integer.parseInt(date.substring(0, 2));
+            int month = Integer.parseInt(date.substring(3, 5));
+            int year = Integer.parseInt(date.substring(6, 10));
+
+            if (date.length() == 10 && date.charAt(2) == '/' && date.charAt(5) == '/' && day > 0 && month > 0 && month < 13 && year > 0) {
+
+                if (month == 4 || month == 6 || month == 9 || month == 11) {
+                    
+                    if (day < 31) return date;
+                    System.out.print("Data inválida. Por favor, tente novamente.\n" + text);
+                    return checkDate(text, scanner);
+
+                }
+
+                if (month == 2) {
+                    
+                    if (day < 29) return date;
+                    if ((year % 4 == 0 && year % 100 != 0 || year % 4 == 0 && year % 100 == 0 && year % 400 == 0) && day < 30) return date;
+                    System.out.print("Data inválida. Por favor, tente novamente.\n" + text);
+                    return checkDate(text, scanner);
+
+                }
+
+                if (day < 32) return date;
+                System.out.print("Data inválida. Por favor, tente novamente.\n" + text);
+                return checkDate(text, scanner);
+
+            }
+
+            System.out.print("Data inválida. Por favor, tente novamente.\n" + text);
+            return checkDate(text, scanner);
+
+        } catch (NumberFormatException error) {
+
+            System.out.print("Data inválida. Por favor, tente novamente.\n" + text);
+            return checkDate(text, scanner);
+
+        } catch (IndexOutOfBoundsException error) {
+
+            System.out.print("Data inválida. Por favor, tente novamente.\n" + text);
+            return checkDate(text, scanner);
 
         }
 
@@ -556,21 +498,52 @@ public class Main {
 
     }
 
-    // Função responsável por determinar se nota final do curso é válida.
-    // Ela precisa ser um número real entre zero e dez, ambos inclusos.
+    // Função responsável por determinar se nota final do curso é válida: ela precisa ser um número real entre zero e dez, ambos inclusos.
     // Apenas os dois primeiros dígitos da expansão decimal são considerados na hora da exibição, com arredondamento.
 
-    public static boolean checkFinalGrade(String final_grade) {
+    public static String checkFinalGrade(String text, Scanner scanner) {
+
+        String final_grade = scanner.nextLine();
 
         try {
 
-            return Float.parseFloat(final_grade) >= 0 && Float.parseFloat(final_grade) <= 10 ? true : false;
+            if (Float.parseFloat(final_grade) >= 0 && Float.parseFloat(final_grade) <= 10) return final_grade;
+            System.out.print("Noto final do curso inválida. Por favor, tente novamente.\n" + text);
+            return checkFinalGrade(text, scanner);
         
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException error) {
 
-            return false;
+            System.out.print("Noto final do curso inválida. Por favor, tente novamente.\n" + text);
+            return checkFinalGrade(text, scanner);
 
         }
+
+    }
+
+    // Função responsável por lidar com as perguntas que aceitam apenas sim ou não como respostas.
+
+    public static boolean yesOrNoQuestion(String text, Scanner scanner) {
+
+        String answer = scanner.nextLine();
+
+        while (!(answer.equals("S") || answer.equals("N"))) {
+
+            System.out.println("Resposta inválida. Por favor, tente novamente. ");
+            System.out.print(text);
+            answer = scanner.nextLine();
+
+        }
+
+        return answer.equals("S") ? true : false;
+
+    }
+
+    // Função responsável por limpar o terminal para o usuário.
+
+    public static void clearTerminal() {
+
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
 
     }
 
