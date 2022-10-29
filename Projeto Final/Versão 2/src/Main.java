@@ -143,7 +143,7 @@ public class Main {
     // Ela tem um inteiro tipo, que determina se o usuário escolheu a opção dois, de apenas mostrar a lista, ou...
     // ...se a função está sendo chamada dentro de outras, nas opções três ou quatro, nas quais mudanças na lista podem ser feitas.
 
-    public static void showList(ArrayList<Person> list, Scanner scanner, int type) {
+    public static void showList(ArrayList<Person> list, Scanner scanner, int identation) {
 
         int index = 1;
 
@@ -168,7 +168,7 @@ public class Main {
 
         }
 
-        if (type == 0) {
+        if (identation == 0) {
 
             System.out.print("Insira qualquer valor para encerrar a exibição de pessoas e alunos: ");
             scanner.nextLine();
