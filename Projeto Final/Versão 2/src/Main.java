@@ -1,8 +1,6 @@
 // +PraTi/Alfamídia - Projeto Final: Versão 2
 // Erick Larratéa Knoblich
-
-// A segunda versão utiliza padrões para todos as propriedades das pessoas e dos alunos.
-// Ela é uma versão mais complexa e mais completa.
+// A segunda versão utiliza padrões para todos as propriedades das pessoas e dos alunos e força o usuário a inserir uma resposta válida.
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -14,7 +12,6 @@ import java.time.LocalDate;
 public class Main {
 
     // Função principal responsável por limpar o terminal, mostrar o menu e lidar com as opções selecionadas pelo o usuário.
-    // Funções auxiliares são chamadas para cada opção selecionada pelo usuário.
     public static void main(String[] args) throws Exception {
 
         boolean end_application = false;
@@ -29,12 +26,8 @@ public class Main {
             clearTerminal();
             System.out.println("Opção selecionada: " + user_input);
 
-            if (!user_input.equals("1")) {
-
-                System.out.println();
-                
-            }
-
+            if (!user_input.equals("1"))  System.out.println();
+            
             switch (user_input) {
 
                 case "1":
@@ -44,17 +37,17 @@ public class Main {
 
                 case "2":
 
-                    showList(list, scanner, 0);
+                    if (checkList(list)) showList(list, scanner, 0);
                     break;
 
                 case "3":
 
-                    updateItemOnList(list, scanner);
+                    if (checkList(list)) updateItemOnList(list, scanner);
                     break;
 
                 case "4":
 
-                    removeItemOnList(list, scanner);
+                    if (checkList(list)) removeItemOnList(list, scanner);
                     break;
 
                 case "5":
@@ -150,46 +143,35 @@ public class Main {
     // Ela tem um inteiro tipo, que determina se o usuário escolheu a opção dois, de apenas mostrar a lista, ou...
     // ...se a função está sendo chamada dentro de outras, nas opções três ou quatro, nas quais mudanças na lista podem ser feitas.
 
-    public static void showList(ArrayList<Person> list, Scanner scanner, int type) throws Exception {
+    public static void showList(ArrayList<Person> list, Scanner scanner, int type) {
 
         int index = 1;
 
-        if (!list.isEmpty()) {
+        for (Person item : list) {
 
-            for (Person item : list) {
+            if (item instanceof Student) {
 
-                if (item instanceof Student) {
-
-                    System.out.println(index + ". Aluno: " + item.getName() + "\n");
-                    System.out.println(item);
-
-                }
-
-                else {
-
-                    System.out.println(index + ". Pessoa: " + item.getName() + "\n");
-                    System.out.println(item);
-
-                }
-
-                System.out.println();
-                index++;
+                System.out.println(index + ". Aluno: " + item.getName() + "\n");
+                System.out.println(item);
 
             }
 
-            if (type == 0) {
+            else {
 
-                System.out.print("Insira qualquer valor para encerrar a exibição de pessoas e alunos: ");
-                scanner.nextLine();
+                System.out.println(index + ". Pessoa: " + item.getName() + "\n");
+                System.out.println(item);
 
             }
+
+            System.out.println();
+            index++;
 
         }
 
-        else {
+        if (type == 0) {
 
-            System.out.print("A lista está vazia. ");
-            Thread.sleep(3000);
+            System.out.print("Insira qualquer valor para encerrar a exibição de pessoas e alunos: ");
+            scanner.nextLine();
 
         }
 
@@ -202,22 +184,11 @@ public class Main {
 
         try {
 
-            if (!list.isEmpty()) {
-
-                showList(list, scanner, 1);
-                System.out.print("Insira o índice da pessoa ou do aluno que desejas alterar: ");
-                int index = scanner.nextInt();
-                scanner.nextLine();
-                updateItem(list.get(index - 1), scanner);
-
-            }
-
-            else {
-
-                System.out.print("A lista está vazia. ");
-                Thread.sleep(3000);
-    
-            }
+            showList(list, scanner, 1);
+            System.out.print("Insira o índice da pessoa ou do aluno que desejas alterar: ");
+            int index = scanner.nextInt();
+            scanner.nextLine();
+            updateItem(list.get(index - 1), scanner);
 
         } catch (InputMismatchException error) {
 
@@ -313,22 +284,11 @@ public class Main {
 
         try {
 
-            if (!list.isEmpty()) {
-
-                showList(list, scanner, 1);
-                System.out.print("Insira o índice da pessoa ou de aluno que desejas deletar: ");
-                int index = scanner.nextInt();
-                scanner.nextLine();
-                list.remove(index - 1);
-
-            }
-
-            else {
-
-                System.out.print("A lista está vazia. ");
-                Thread.sleep(3000);
-    
-            }
+            showList(list, scanner, 1);
+            System.out.print("Insira o índice da pessoa ou de aluno que desejas deletar: ");
+            int index = scanner.nextInt();
+            scanner.nextLine();
+            list.remove(index - 1);
 
         } catch (InputMismatchException error) {
 
@@ -368,6 +328,17 @@ public class Main {
                          "5. Encerrar programa.\n" +
                          "6. Adicionar exemplos de pessoas e alunos à lista.\n\n" +
                          "Insira sua opção: ");
+
+    }
+
+    // Função responsável por checar se a lista está vazia, alertando o usuário caso esteja.
+
+    public static boolean checkList(ArrayList <Person> list) throws Exception {
+
+        if (list.isEmpty() == false) return true;
+        System.out.print("A lista está vazia. ");
+        Thread.sleep(3000);
+        return false;
 
     }
 
