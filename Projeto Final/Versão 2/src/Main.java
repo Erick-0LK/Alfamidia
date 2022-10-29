@@ -78,7 +78,7 @@ public class Main {
         }
 
         scanner.close();
-        System.out.println("A aplicação foi encerrada. ");
+        System.out.print("A aplicação foi encerrada. ");
 
     }
 
@@ -208,19 +208,7 @@ public class Main {
                 System.out.print("Insira o índice da pessoa ou do aluno que desejas alterar: ");
                 int index = scanner.nextInt();
                 scanner.nextLine();
-
-                if (!(index < 1 || index > list.size())) {
-
-                    updateItem(list.get(index - 1), scanner);
-
-                }
-
-                else {
-
-                    System.out.print("\nResposta inválida. ");
-                    Thread.sleep(3000);
-
-                }
+                updateItem(list.get(index - 1), scanner);
 
             }
 
@@ -228,13 +216,18 @@ public class Main {
 
                 System.out.print("A lista está vazia. ");
                 Thread.sleep(3000);
-
+    
             }
 
-        } catch (InputMismatchException e) {
+        } catch (InputMismatchException error) {
 
-            System.out.print("\nResposta inválida. ");
+            System.out.print("\nÍndice inválido. Por favor, tente novamente.");
             scanner.nextLine();
+            Thread.sleep(3000);
+
+        } catch (IndexOutOfBoundsException error) {
+
+            System.out.print("\nÍndice inválido. Por favor, tente novamente.");
             Thread.sleep(3000);
 
         }
@@ -326,19 +319,7 @@ public class Main {
                 System.out.print("Insira o índice da pessoa ou de aluno que desejas deletar: ");
                 int index = scanner.nextInt();
                 scanner.nextLine();
-
-                if (!(index < 1 || index > list.size())) {
-
-                    list.remove(index - 1);
-
-                }
-
-                else {
-
-                    System.out.print("\nResposta inválida. Por favor, tente novamente. ");
-                    Thread.sleep(3000);
-
-                }
+                list.remove(index - 1);
 
             }
 
@@ -346,13 +327,18 @@ public class Main {
 
                 System.out.print("A lista está vazia. ");
                 Thread.sleep(3000);
-
+    
             }
 
-        } catch (InputMismatchException e) {
+        } catch (InputMismatchException error) {
 
-            System.out.print("\nResposta inválida. Por favor, tente novamente. ");
+            System.out.print("\nÍndice inválido. Por favor, tente novamente. ");
             scanner.nextLine();
+            Thread.sleep(3000);
+
+        } catch (IndexOutOfBoundsException error) {
+
+            System.out.print("\nÍndice inválido. Por favor, tente novamente. ");
             Thread.sleep(3000);
 
         }
