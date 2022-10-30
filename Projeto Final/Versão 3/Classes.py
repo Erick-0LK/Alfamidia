@@ -11,10 +11,10 @@ class Person:
 
     def showObject(self):
 
-        information = ["Nome: " + self.name + "\n" +
-                       "Número de CPF: " + self.id + "\n" +
-                       "Número de telefone: " + self.phone_number + "\n" +
-                       "Data de nascimento: " + self.birth_date]
+        information = ["Nome: " + str(self.name) + "\n" +
+                       "Número de CPF: " + str(self.id) + "\n" +
+                       "Número de telefone: " + str(self.phone_number) + "\n" +
+                       "Data de nascimento: " + str(self.birth_date)]
                     
         return information[0]
 
@@ -29,7 +29,7 @@ class Student(Person):
 
     def showObject(self):
 
-        return super().showObject() + "\n" + "Nota: " + self.grade
+        return super().showObject() + "\n" + "Nota: " + str(self.grade)
 
 # ------------------------------------------------------------------------------------------------------------
 
@@ -42,4 +42,4 @@ class Professor(Person):
 
     def showObject(self):
 
-        return super().showObject() + "\n" + "Matéria: " + self.course
+        return super().showObject() + "\n" + "Matéria: " + str(self.course)

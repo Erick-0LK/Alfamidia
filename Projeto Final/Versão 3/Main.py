@@ -93,36 +93,45 @@ def updateItemOnList(list):
         showList(list, 1)
         user_input = int(input("Insira o índice da pessoa, aluno ou professor que desejas alterar: "))
         index = user_input - 1
-        object = list[index]
-        os.system('cls||clear')
-        print("Pessoa, aluno ou professor selecionado:\n\n" + object.showObject())
+        
+        if index >= 0:
+            
+            object = list[index]
+            os.system('cls||clear')
+            print("Pessoa, aluno ou professor selecionado:\n\n" + object.showObject())
 
-        if yesOrNoQuestion(texts[0], 1) is True:
+            if yesOrNoQuestion(texts[0], 1) is True:
 
-            list[index].name = checkName()
+                list[index].name = checkName()
 
-        if yesOrNoQuestion(texts[1], 1) is True:
+            if yesOrNoQuestion(texts[1], 1) is True:
 
-            list[index].id = checkId()
-        if yesOrNoQuestion(texts[2], 1) is True:
+                list[index].id = checkId()
+                
+            if yesOrNoQuestion(texts[2], 1) is True:
 
-            list[index].phone_number = checkPhoneNumber()
+                list[index].phone_number = checkPhoneNumber()
 
-        if yesOrNoQuestion(texts[3], 1) is True:
+            if yesOrNoQuestion(texts[3], 1) is True:
 
-            list[index].birth_date = checkBirthDate()
+                list[index].birth_date = checkBirthDate()
 
-        if isinstance(object, Student):
+            if isinstance(object, Student):
 
-            if yesOrNoQuestion(texts[4], 1) is True:
+                if yesOrNoQuestion(texts[4], 1) is True:
 
-                list[index].grade = checkGrade()
+                    list[index].grade = checkGrade()
 
-        elif isinstance(object, Professor):
+            elif isinstance(object, Professor):
 
-            if yesOrNoQuestion(texts[5], 1) is True:
+                if yesOrNoQuestion(texts[5], 1) is True:
 
-                list[index].course = checkCourse()
+                    list[index].course = checkCourse()
+                    
+        else:
+            
+            print("\nÍndice inválido. Insira qualquer valor para continuar.\n")
+            m.getch()
 
     except (IndexError, ValueError):
 
@@ -137,7 +146,15 @@ def removeItemOnList(list):
         
         showList(list, 1)
         user_input = input("Insira o índice do elemento que desejas deletar: ")
-        list.pop(int(user_input) - 1)
+        
+        if int(user_input) - 1 >= 0:
+            
+            list.pop(int(user_input) - 1)
+            
+        else:
+            
+            print("\nÍndice inválido. Insira qulquer valor para continuar.\n")
+            m.getch()
 
     except (IndexError, ValueError):
 
@@ -193,7 +210,12 @@ def checkList(list):
 def checkName():
 
     name = input("Exemplo de nome: Fulano Sicrano Beltrano\nInsira o nome: ")
-    if bool(re.match('[a-zA-Z\s]+$', name)) is True and not name.isspace(): return name
+    
+    if bool(re.match('[a-zA-Z\s]+$', name)) is True and not name.isspace():
+        
+        print()
+        return name
+    
     print("Nome inválido. Por favor, tente novamente.\n")
     checkName()
 
@@ -203,12 +225,15 @@ def checkId():
     
     try:
     
-        id = input("\nExemplo de número de CPF: 012.345.678-90\nInsira o número de CPF: ")
+        id = input("Exemplo de número de CPF: 012.345.678-90\nInsira o número de CPF: ")
         test_1 = len(id) == 14
         test_2 = id[0:3].isdigit() and id[4:7].isdigit() and id[8:11].isdigit() and id[12:14].isdigit()
         test_3 = id[3] == "." and id[7] == "." and id[11] == "-"
         
-        if test_1 and test_2 and test_3: return id
+        if test_1 and test_2 and test_3:
+            
+            print()
+            return id
         
         print("Número de CPF inválido. Por favor, tente novamente.\n")
         checkId()
@@ -222,8 +247,13 @@ def checkId():
 
 def checkPhoneNumber():
 
-    phone_number = input("\nExemplo de número de telefone: 5551123456789\nInsira o número de telefone: ")
-    if len(phone_number) == 13 and phone_number.isdigit(): return phone_number
+    phone_number = input("Exemplo de número de telefone: 5551123456789\nInsira o número de telefone: ")
+    
+    if len(phone_number) == 13 and phone_number.isdigit():
+        
+        print()
+        return phone_number
+    
     print("Número de telefone inválido. Por favor, tente novamente.\n")
     checkPhoneNumber()
 
@@ -233,7 +263,7 @@ def checkBirthDate():
     
     try:
 
-        birth_date = input("\nExemplo de data de aniversário: 01/01/2022\nInsira a data de aniversário: ")
+        birth_date = input("Exemplo de data de aniversário: 01/01/2022\nInsira a data de aniversário: ")
         day = int(birth_date[0:2])
         month = int(birth_date[3:5])
         year = int(birth_date[6:10])
@@ -252,7 +282,7 @@ def checkBirthDate():
         print("Data de aniverário inválida. Por favor tente novamente.\n")
         checkBirthDate()
     
-    except IndexError:
+    except (IndexError, ValueError):
         
         print("Data de aniverário inválida. Por favor tente novamente.\n")
         checkBirthDate()
@@ -264,13 +294,17 @@ def checkGrade():
     try:
 
         grade = input("\nExemplo de nota: 0 <= x <= 10\nInsira a nota: ")
-        if 0 <= float(grade) <= 10: return grade
-        print("Nota inválida. Por favor, tente novamente.\n")
+        
+        if 0 <= float(grade) <= 10:
+            
+            return grade
+        
+        print("Nota inválida. Por favor, tente novamente.")
         checkGrade()
 
     except ValueError:
         
-        print("Nota inválida. Por favor, tente novamente.\n")
+        print("Nota inválida. Por favor, tente novamente.")
         checkGrade()
 
 # ------------------------------------------------------------------------------------------------------------
@@ -279,27 +313,27 @@ def checkCourse():
 
     try:
         
-        index = int(input("\nInsira o índcice correspondente à matéria.\n\n"
-                          "1. Programação C\n"
-                          "2. Programação C++\n"
-                          "3. Programação C#\n"
-                          "4. Programação Python\n"
-                          "5. Programação Java\n"
-                          "6. Programação Haskell\n\n"
-                          "Insira o índcice: "))
-
         map = {"1" : "Programação C",
                "2" : "Programação C++",
                "3" : "Programação C#",
                "4" : "Programção Python",
                "5" : "Programação Java",
                "6" : "Programação Haskell"}
-
+        
+        index = input("\nInsira o índice correspondente à matéria.\n\n"
+                          "1. Programação C\n"
+                          "2. Programação C++\n"
+                          "3. Programação C#\n"
+                          "4. Programação Python\n"
+                          "5. Programação Java\n"
+                          "6. Programação Haskell\n\n"
+                          "Insira o índice: ")
+        
         return map[index]
     
-    except (IndexError, ValueError):
+    except (KeyError):
         
-        print("Índcice inválido. Por favor, tente novamente.\n")
+        print("Índice inválido. Por favor, tente novamente.")
         checkCourse()
 
 # MAIN PROGRAM ===============================================================================================
