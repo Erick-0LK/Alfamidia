@@ -1,12 +1,10 @@
-// +PraTi/Alfamídia - Projeto Final: Versão 2
-// Erick Larratéa Knoblich
-// A segunda versão utiliza padrões para todos as propriedades das pessoas e dos alunos e força o usuário a inserir uma resposta válida.
+// +PraTi/Alfamídia - Projeto Final: Versão 2 | Erick Larratéa Knoblich
+// A segunda versão utiliza padrões para todos as propriedades dos objetos, mostra exemplos válidos e força o usuário a inserir uma resposta válida.
 
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
-import java.util.InputMismatchException;
 import java.time.LocalDate;
 
 public class Main {
@@ -26,7 +24,7 @@ public class Main {
             clearTerminal();
             System.out.println("Opção selecionada: " + user_input);
 
-            if (!user_input.equals("1"))  System.out.println();
+            if (!user_input.equals("1")) System.out.println();
             
             switch (user_input) {
 
@@ -186,19 +184,12 @@ public class Main {
 
             showList(list, scanner, 1);
             System.out.print("Insira o índice da pessoa ou do aluno que desejas alterar: ");
-            int index = scanner.nextInt();
-            scanner.nextLine();
-            updateItem(list.get(index - 1), scanner);
+            String index = scanner.nextLine();
+            updateItem(list.get(Integer.parseInt(index) - 1), scanner);
 
-        } catch (InputMismatchException error) {
+        } catch (NumberFormatException | IndexOutOfBoundsException error) {
 
-            System.out.print("\nÍndice inválido. Por favor, tente novamente.");
-            scanner.nextLine();
-            Thread.sleep(3000);
-
-        } catch (IndexOutOfBoundsException error) {
-
-            System.out.print("\nÍndice inválido. Por favor, tente novamente.");
+            System.out.print("\nÍndice inválido. Por favor, tente novamente. ");
             Thread.sleep(3000);
 
         }
@@ -286,17 +277,10 @@ public class Main {
 
             showList(list, scanner, 1);
             System.out.print("Insira o índice da pessoa ou de aluno que desejas deletar: ");
-            int index = scanner.nextInt();
-            scanner.nextLine();
-            list.remove(index - 1);
+            String index = scanner.nextLine();
+            list.remove(Integer.parseInt(index) - 1);
 
-        } catch (InputMismatchException error) {
-
-            System.out.print("\nÍndice inválido. Por favor, tente novamente. ");
-            scanner.nextLine();
-            Thread.sleep(3000);
-
-        } catch (IndexOutOfBoundsException error) {
+        } catch (NumberFormatException | IndexOutOfBoundsException error) {
 
             System.out.print("\nÍndice inválido. Por favor, tente novamente. ");
             Thread.sleep(3000);
@@ -336,6 +320,7 @@ public class Main {
     public static boolean checkList(ArrayList <Person> list) throws Exception {
 
         if (list.isEmpty() == false) return true;
+        
         System.out.print("A lista está vazia. ");
         Thread.sleep(3000);
         return false;
@@ -350,11 +335,7 @@ public class Main {
         Pattern pattern = Pattern.compile("^[ A-Za-z]+$");
         Matcher matcher = pattern.matcher(name);
 
-        if (!name.trim().isEmpty() && matcher.matches()) {
-
-            return name;
-
-        }
+        if (!name.trim().isEmpty() && matcher.matches()) return name;
 
         System.out.print("Nome inválido. Por favor, tente novamente.\n" + text);
         return checkName(text, scanner);
@@ -369,13 +350,7 @@ public class Main {
         
         try {
 
-            Long.parseLong(phone_number);
-
-            if (phone_number.length() == 13) {
-
-                return phone_number;
-
-            }
+            if (Long.toString(Long.parseLong(phone_number)).length() == 13) return phone_number;
 
             System.out.print("Número de telefone inválido. Por favor, tente novamente.\n" + text);
             return checkPhoneNumber(text, scanner);
@@ -401,40 +376,18 @@ public class Main {
             int month = Integer.parseInt(date.substring(3, 5));
             int year = Integer.parseInt(date.substring(6, 10));
 
-            if (date.length() == 10 && date.charAt(2) == '/' && date.charAt(5) == '/' && day > 0 && month > 0 && month < 13 && year > 0) {
+            if (date.length() == 10 && date.charAt(2) == '/' && date.charAt(5) == '/' && day > 0 && day < 32 && month > 0 && month < 13 && year > 0) {
 
-                if (month == 4 || month == 6 || month == 9 || month == 11) {
-                    
-                    if (day < 31) return date;
-                    System.out.print("Data inválida. Por favor, tente novamente.\n" + text);
-                    return checkDate(text, scanner);
-
-                }
-
-                if (month == 2) {
-                    
-                    if (day < 29) return date;
-                    if ((year % 4 == 0 && year % 100 != 0 || year % 4 == 0 && year % 100 == 0 && year % 400 == 0) && day < 30) return date;
-                    System.out.print("Data inválida. Por favor, tente novamente.\n" + text);
-                    return checkDate(text, scanner);
-
-                }
-
-                if (day < 32) return date;
-                System.out.print("Data inválida. Por favor, tente novamente.\n" + text);
-                return checkDate(text, scanner);
+                if ((month == 4 || month == 6 || month == 9 || month == 11) && day != 31) return date;
+                if (month != 2 && month != 4 && month != 6 && month != 9 && month != 11) return date;
+                if (day < 29 || (year % 4 == 0 && year % 100 != 0 || year % 4 == 0 && year % 100 == 0 && year % 400 == 0 && day < 30)) return date;
 
             }
 
             System.out.print("Data inválida. Por favor, tente novamente.\n" + text);
             return checkDate(text, scanner);
 
-        } catch (NumberFormatException error) {
-
-            System.out.print("Data inválida. Por favor, tente novamente.\n" + text);
-            return checkDate(text, scanner);
-
-        } catch (IndexOutOfBoundsException error) {
+        } catch (NumberFormatException | IndexOutOfBoundsException error) {
 
             System.out.print("Data inválida. Por favor, tente novamente.\n" + text);
             return checkDate(text, scanner);
@@ -465,6 +418,7 @@ public class Main {
         try {
 
             if (Float.parseFloat(final_grade) >= 0 && Float.parseFloat(final_grade) <= 10) return final_grade;
+
             System.out.print("Noto final do curso inválida. Por favor, tente novamente.\n" + text);
             return checkFinalGrade(text, scanner);
         
