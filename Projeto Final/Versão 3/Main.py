@@ -5,8 +5,7 @@
 
 # IMPORTS ====================================================================================================
 
-import os, re, msvcrt as m
-from Classes import Person, Student, Professor
+import Classes, os, re, msvcrt as m
 
 # FUNCTIONS ==================================================================================================
 
@@ -34,18 +33,18 @@ def addItemToList(list):
     if yesOrNoQuestion(texts[0], 0) is True:
 
         grade = checkGrade()
-        list.append(Student(name, id, phone_number, birth_date, grade))
+        list.append(Classes.Student(name, id, phone_number, birth_date, grade))
 
     else:
 
         if yesOrNoQuestion(texts[1], 0) is True:
 
             course = checkCourse()
-            list.append(Professor(name, id, phone_number, birth_date, course))
+            list.append(Classes.Professor(name, id, phone_number, birth_date, course))
 
         else:
 
-            list.append(Person(name, id, phone_number, birth_date))
+            list.append(Classes.Person(name, id, phone_number, birth_date))
 
 # ------------------------------------------------------------------------------------------------------------
 
@@ -55,12 +54,12 @@ def showList(list, identation):
 
     for object in list:
 
-        if isinstance(object, Professor):
+        if isinstance(object, Classes.Professor):
 
             print(str(index) + ". Professor: " + object.name + "\n")
             print(object.showObject() + "\n")
 
-        elif isinstance(object, Student):
+        elif isinstance(object, Classes.Student):
 
             print(str(index) + ". Aluno: " + object.name + "\n")
             print(object.showObject() + "\n")
@@ -116,13 +115,13 @@ def updateItemOnList(list):
 
                 list[index].birth_date = checkBirthDate()
 
-            if isinstance(object, Student):
+            if isinstance(object, Classes.Student):
 
                 if yesOrNoQuestion(texts[4], 1) is True:
 
                     list[index].grade = checkGrade()
 
-            elif isinstance(object, Professor):
+            elif isinstance(object, Classes.Professor):
 
                 if yesOrNoQuestion(texts[5], 1) is True:
 
@@ -165,9 +164,9 @@ def removeItemOnList(list):
 
 def addExamplesToList(list):
 
-    list.append(Person("Pessoa Exemplo", "12345678910", "5551123456789", "01/01/2022"))
-    list.append(Student("Aluno Exemplo", "12345678910", "5551123456789", "01/01/2022", "10"))
-    list.append(Professor("Professor Exemplo", "12345678910", "5551123456789", "01/01/2022", "Programção C"))
+    list.append(Classes.Person("Pessoa Exemplo", "12345678910", "5551123456789", "01/01/2022"))
+    list.append(Classes.Student("Aluno Exemplo", "12345678910", "5551123456789", "01/01/2022", "10"))
+    list.append(Classes.Professor("Professor Exemplo", "12345678910", "5551123456789", "01/01/2022", "Programção C"))
     
     print("Exemplos foram adicionados. Insira qulquer valor para continuar.\n")
     m.getch()
@@ -297,6 +296,8 @@ def checkGrade():
         
         if 0 <= float(grade) <= 10:
             
+            #print(grade)
+            #input("FUDEU")
             return grade
         
         print("Nota inválida. Por favor, tente novamente.")
@@ -310,28 +311,30 @@ def checkGrade():
 # ------------------------------------------------------------------------------------------------------------
 
 def checkCourse():
-
+    
+    map = {"1" : "Programação C",
+           "2" : "Programação C++",
+           "3" : "Programação C#",
+           "4" : "Programção Python",
+           "5" : "Programação Java",
+           "6" : "Programação Haskell"}
+    
+    index = input("\nInsira o índice correspondente à matéria.\n\n"
+                  "1. Programação C\n"
+                  "2. Programação C++\n"
+                  "3. Programação C#\n"
+                  "4. Programação Python\n"
+                  "5. Programação Java\n"
+                  "6. Programação Haskell\n\n"
+                  "Insira o índice: ")
+    
     try:
         
-        map = {"1" : "Programação C",
-               "2" : "Programação C++",
-               "3" : "Programação C#",
-               "4" : "Programção Python",
-               "5" : "Programação Java",
-               "6" : "Programação Haskell"}
-        
-        index = input("\nInsira o índice correspondente à matéria.\n\n"
-                          "1. Programação C\n"
-                          "2. Programação C++\n"
-                          "3. Programação C#\n"
-                          "4. Programação Python\n"
-                          "5. Programação Java\n"
-                          "6. Programação Haskell\n\n"
-                          "Insira o índice: ")
-        
+        #print(map[index])
+        #input("FUDEU")
         return map[index]
-    
-    except (KeyError):
+        
+    except KeyError:
         
         print("Índice inválido. Por favor, tente novamente.")
         checkCourse()
