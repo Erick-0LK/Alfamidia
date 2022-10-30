@@ -23,11 +23,11 @@ A primeira versão é a versão mais simples do projeto final, uma vez que aceit
 ### Versão 2 :coffee:
 
 <p align="justify">
-A segunda versão é a versão mais complexa do projeto final, uma vez que tem parâmetros para as propriedades dos objetos: pessoas e alunos. Por exemplo, a string "abc" não é mais válida para uma data de nascimento. Agora, uma data válida do calendário gregoriano precisa ser inserida no formato dd/mm/aaaa. Todos as propriedades possuem parâmetros. Além disso, o usuário recebe exemplos de respostas válidas e é forçado a inserir uma resposta válida.
+A segunda versão é a versão mais complexa do projeto final, uma vez que tem parâmetros para todas as propriedades dos objetos: pessoas e alunos. Por exemplo, a string "abc" não é mais válida para uma data de nascimento. Agora, uma data válida do calendário gregoriano precisa ser inserida no formato dd/mm/aaaa. Além disso, o usuário recebe exemplos de respostas válidas e é forçado a inserir uma resposta válida.
 </p>
 
 ### Versão 3 :snake:
 
 <p align="justify">
-A terceira versão é uma aplicação semelhante, uma CRUD com objetos e propriedades diferentes, mas menos complexa feito na linguagem de programação Python ao invés da linguagem de programação Java, a linguagem estudada durante o curso. Ela é uma versão bônus e serve para mostrar outras habilidades minhas, assim como os meus outros repositórios, alguns sendo da faculdade de Ciência da Computação (UFRGS).
+A terceira versão é uma aplicação semelhante, uma CRUD com objetos e propriedades diferentes, mas menos complexa e feita na linguagem de programação Python ao invés da linguagem de programação Java, a linguagem estudada durante o curso. Ela é uma versão bônus e serve para mostrar outras habilidades minhas, assim como os meus outros repositórios, alguns sendo da faculdade de Ciência da Computação (UFRGS).
 </p>
