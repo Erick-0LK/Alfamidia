@@ -1,53 +1,12 @@
+# INFORMATION ================================================================================================
+
+# +PraTi/Alfamídia - Projeto Final: Versão 3 | Erick Larratéa Knoblich
+# A terceira versão é uma versão bônus semelhante à versão dois.
+
 # IMPORTS ====================================================================================================
 
-import os, re
-import msvcrt as m
-
-# CLASSSES ===================================================================================================
-
-class Person:
-
-    def __init__(self, name, id, phone_number, birth_date):
-
-        self.name = name
-        self.id = id
-        self.phone_number = phone_number
-        self.birth_date = birth_date
-
-    def showObject(self):
-
-        information = ["Nome: " + self.name + "\n" +
-                       "Número de CPF: " + self.id + "\n" +
-                       "Número de telefone: " + self.phone_number + "\n" +
-                       "Data de nascimento: " + self.birth_date]
-                    
-        return information[0]
-
-# ------------------------------------------------------------------------------------------------------------
-
-class Student(Person):
-
-    def __init__(self, name, id, phone_number, birth_date, grade):
-
-        super().__init__(name, id, phone_number, birth_date)
-        self.grade = grade
-
-    def showObject(self):
-
-        return super().showObject() + "\n" + "Nota: " + self.grade
-
-# ------------------------------------------------------------------------------------------------------------
-
-class Professor(Person):
-
-    def __init__(self, name, id, phone_number, birth_date, course):
-
-        super().__init__(name, id, phone_number, birth_date)
-        self.course = course
-
-    def showObject(self):
-
-        return super().showObject() + "\n" + "Matéria: " + self.course
+import os, re, msvcrt as m
+from Classes import Person, Student, Professor
 
 # FUNCTIONS ==================================================================================================
 
@@ -67,21 +26,21 @@ def addItemToList(list):
 
     texts = ["\nDesejas inserir uma nota final? Sim ou não? (S/N): ",
              "\nDesejas inserir uma matéria? Sim ou não? (S/N): "]
-    name = checkProperty("Name")
-    id = checkProperty("Id")
-    phone_number = checkProperty("Phone Number")
-    birth_date = checkProperty("Birth Date")
+    name = checkName()
+    id = checkId()
+    phone_number = checkPhoneNumber()
+    birth_date = checkBirthDate()
 
     if yesOrNoQuestion(texts[0], 0) is True:
 
-        grade = checkProperty("Grade")
+        grade = checkGrade()
         list.append(Student(name, id, phone_number, birth_date, grade))
 
     else:
 
         if yesOrNoQuestion(texts[1], 0) is True:
 
-            course = checkProperty("Course")
+            course = checkCourse()
             list.append(Professor(name, id, phone_number, birth_date, course))
 
         else:
@@ -92,121 +51,97 @@ def addItemToList(list):
 
 def showList(list, identation):
 
-    if len(list) != 0:
+    index = 1
 
-        index = 1
+    for object in list:
 
-        for object in list:
+        if isinstance(object, Professor):
 
-            if isinstance(object, Professor):
+            print(str(index) + ". Professor: " + object.name + "\n")
+            print(object.showObject() + "\n")
 
-                print(str(index) + ". Professor: " + object.name + "\n")
-                print(object.showObject() + "\n")
+        elif isinstance(object, Student):
 
-            elif isinstance(object, Student):
+            print(str(index) + ". Aluno: " + object.name + "\n")
+            print(object.showObject() + "\n")
 
-                print(str(index) + ". Aluno: " + object.name + "\n")
-                print(object.showObject() + "\n")
+        else:
 
-            else:
+            print(str(index) + ". Pessoa: " + object.name + "\n")
+            print(object.showObject() + "\n")
 
-                print(str(index) + ". Pessoa: " + object.name + "\n")
-                print(object.showObject() + "\n")
+        index += 1
 
-            index += 1
+    if identation == 0:
 
-        if identation == 0:
-
-            print("Insira qualquer valor para encerrar a exibição.\n")
-            m.getch()
-
-    else:
-
-        print("A lista está vazia. Insira qualquer valor para continuar.\n")
+        print("Insira qualquer valor para encerrar a exibição.\n")
         m.getch()
 
 # ------------------------------------------------------------------------------------------------------------
 
 def updateItemOnList(list):
 
-    if len(list) != 0:
+    try:
 
         texts = ["\nDesejas alterar o nome? Sim ou não? (S/N): ",
-                "\nDesejas alterar o número de CPF? Sim ou não? (S/N): ",
-                "\nDesejas alterar o número de telefone? Sim ou não? (S/N): ",
-                "\nDesejas alterar a data de nascimento? Sim ou não? (S/N): ",
-                "\nDesejas alterar a nota final? Sim ou não? (S/N): ",
-                "\nDesejas alterar a cadeira? Sim ou não? (S/N): "]
-
+                 "\nDesejas alterar o número de CPF? Sim ou não? (S/N): ",
+                 "\nDesejas alterar o número de telefone? Sim ou não? (S/N): ",
+                 "\nDesejas alterar a data de nascimento? Sim ou não? (S/N): ",
+                 "\nDesejas alterar a nota final? Sim ou não? (S/N): ",
+                 "\nDesejas alterar a matéira? Sim ou não? (S/N): "]
+        
         showList(list, 1)
-        user_input = input("Insira o índice do elemento que desejas alterar: ")
+        user_input = int(input("Insira o índice da pessoa, aluno ou professor que desejas alterar: "))
+        index = user_input - 1
+        object = list[index]
+        os.system('cls||clear')
+        print("Pessoa, aluno ou professor selecionado:\n\n" + object.showObject())
 
-        if user_input.isdigit() and int(user_input) > 0 and int(user_input) <= len(list):
+        if yesOrNoQuestion(texts[0], 1) is True:
 
-            os.system('cls||clear')
-            index = int(user_input) - 1
-            object = list[index]
-            print("Objeto selecionado:\n\n" + object.showObject())
+            list[index].name = checkName()
 
-            if yesOrNoQuestion(texts[0], 1) is True:
+        if yesOrNoQuestion(texts[1], 1) is True:
 
-                list[index].name = checkProperty("Name")
+            list[index].id = checkId()
+        if yesOrNoQuestion(texts[2], 1) is True:
 
-            if yesOrNoQuestion(texts[1], 1) is True:
+            list[index].phone_number = checkPhoneNumber()
 
-                list[index].id = checkProperty("Id")
+        if yesOrNoQuestion(texts[3], 1) is True:
 
-            if yesOrNoQuestion(texts[2], 1) is True:
+            list[index].birth_date = checkBirthDate()
 
-                list[index].phone_number = checkProperty("Phone Number")
+        if isinstance(object, Student):
 
-            if yesOrNoQuestion(texts[3], 1) is True:
+            if yesOrNoQuestion(texts[4], 1) is True:
 
-                list[index].birth_date = checkProperty("Birth Date")
+                list[index].grade = checkGrade()
 
-            if isinstance(object, Student):
+        elif isinstance(object, Professor):
 
-                if yesOrNoQuestion(texts[4], 1) is True:
+            if yesOrNoQuestion(texts[5], 1) is True:
 
-                    list[index].grade = checkProperty("Grade")
+                list[index].course = checkCourse()
 
-            elif isinstance(object, Professor):
+    except (IndexError, ValueError):
 
-                if yesOrNoQuestion(texts[5], 1) is True:
-
-                    list[index].course = checkProperty("Course")
-
-        else: 
-
-            print("\nÍndice inválido. Insira qulquer valor para continuar.\n")
-            m.getch()
-
-    else:
-
-        print("A lista está vazia. Insira qualquer valor para continuar.\n")
+        print("\nÍndice inválido. Insira qualquer valor para continuar.\n")
         m.getch()
 
 # ------------------------------------------------------------------------------------------------------------
 
 def removeItemOnList(list):
 
-    if len(list) != 0:
-
+    try:
+        
         showList(list, 1)
         user_input = input("Insira o índice do elemento que desejas deletar: ")
+        list.pop(int(user_input) - 1)
 
-        if user_input.isdigit() and int(user_input) > 0 and int(user_input) <= len(list):
+    except (IndexError, ValueError):
 
-            list.pop(int(user_input) - 1)
-
-        else: 
-
-            print("\nÍndice inválido. Insira qulquer valor para continuar.\n")
-            m.getch()
-
-    else:
-
-        print("A lista está vazia. Insira qualquer valor para continuar.\n")
+        print("\nÍndice inválido. Insira qulquer valor para continuar.\n")
         m.getch()
 
 # ------------------------------------------------------------------------------------------------------------
@@ -243,53 +178,24 @@ def yesOrNoQuestion(text, identation):
 
 # ------------------------------------------------------------------------------------------------------------
 
-def checkProperty(property_type):
-
-    acceptance = False
-
-    if property_type != "Name": print()
-
-    while acceptance is False:
+def checkList(list):
+    
+    if len(list) == 0:
         
-        match property_type:
-
-            case "Name":
-
-                acceptance, property = checkName()
-
-            case "Id":
-
-                acceptance, property = checkId()
-
-            case "Phone Number":
-
-                acceptance, property = checkPhoneNumber()
-
-            case "Birth Date":
-
-                acceptance, property = checkBirthDate()
-
-            case "Grade":
-
-                acceptance, property = checkGrade()
-
-            case "Course":
-
-                acceptance, property = checkCourse()
-
-        if acceptance is False:
-
-            print("Resposta inválida. Por favor, tente novamente.\n")
-
-    return property
+        print("A lista está vazia. Insira qualquer valor para continuar.\n")
+        m.getch()
+        return False
+    
+    return True
 
 # ------------------------------------------------------------------------------------------------------------
 
 def checkName():
 
     name = input("Exemplo de nome: Fulano Sicrano Beltrano\nInsira o nome: ")
-    acceptance = True if bool(re.match('[a-zA-Z\s]+$', name)) is True and not name.isspace() else False
-    return acceptance, name
+    if bool(re.match('[a-zA-Z\s]+$', name)) is True and not name.isspace(): return name
+    print("Nome inválido. Por favor, tente novamente.\n")
+    checkName()
 
 # ------------------------------------------------------------------------------------------------------------
 
@@ -297,22 +203,29 @@ def checkId():
     
     try:
     
-        id = input("Exemplo de número de CPF: 012.345.678-90\nInsira o número de CPF: ")
+        id = input("\nExemplo de número de CPF: 012.345.678-90\nInsira o número de CPF: ")
         test_1 = len(id) == 14
         test_2 = id[0:3].isdigit() and id[4:7].isdigit() and id[8:11].isdigit() and id[12:14].isdigit()
         test_3 = id[3] == "." and id[7] == "." and id[11] == "-"
-        acceptance = True if test_1 and test_2 and test_3 else False
-        return acceptance, id
+        
+        if test_1 and test_2 and test_3: return id
+        
+        print("Número de CPF inválido. Por favor, tente novamente.\n")
+        checkId()
     
-    except IndexError: return False, None
+    except IndexError:
+        
+        print("Número de CPF inválido. Por favor, tente novamente.\n")
+        checkId()
 
 # ------------------------------------------------------------------------------------------------------------
 
 def checkPhoneNumber():
 
-    phone_number = input("Exemplo de número de telefone: 5551123456789\nInsira o número de telefone: ")
-    acceptance = True if len(phone_number) == 13 and phone_number.isdigit() else False
-    return acceptance, phone_number
+    phone_number = input("\nExemplo de número de telefone: 5551123456789\nInsira o número de telefone: ")
+    if len(phone_number) == 13 and phone_number.isdigit(): return phone_number
+    print("Número de telefone inválido. Por favor, tente novamente.\n")
+    checkPhoneNumber()
 
 # ------------------------------------------------------------------------------------------------------------
 
@@ -320,78 +233,74 @@ def checkBirthDate():
     
     try:
 
-        birth_date = input("Exemplo de data de aniversário: 01/01/2022\nInsira a data de aniversário: ")
+        birth_date = input("\nExemplo de data de aniversário: 01/01/2022\nInsira a data de aniversário: ")
+        day = int(birth_date[0:2])
+        month = int(birth_date[3:5])
+        year = int(birth_date[6:10])
         test_1 = len(birth_date) == 10
         test_2 = birth_date[0:2].isdigit() and birth_date[3:5].isdigit() and birth_date[6:10].isdigit()
         test_3 = birth_date[2] == "/" and birth_date[5] == "/"
+        test_4 = day >= 1 and day <= 31 and month >= 1 and month <= 12 and year >= 1
+        test_5 = year % 4 == 0 and year % 100 != 0 or year % 4 == 0 and year % 100 == 0 and year % 400 == 0
 
-        if test_1 and test_2 and test_3:
+        if test_1 and test_2 and test_3 and test_4:
 
-            day = int(birth_date[0:2])
-            month = int(birth_date[3:5])
-            year = int(birth_date[6:10])
+            if (month == 4 or month == 6 or month == 9 or month == 11) and day != 31: return birth_date
+            if month != 2 and month != 4 and month != 6 and month != 9 and month != 11: return birth_date
+            if day <= 28 or day <= 29 and test_5: return birth_date
 
-            if day > 0 and month > 0 and month < 13 and year > 0:
-
-                if month == 4 or month == 6 or month == 9 or month == 11:
-
-                    acceptance = True if day < 31 else False
-                    return acceptance, birth_date
-
-                if month == 2:
-
-                    if year % 4 == 0 and year % 100 != 0 or year % 4 == 0 and year % 100 == 0 and year % 400 == 0:
-
-                        acceptance = True if day < 30 else False
-                        return acceptance, birth_date
-
-                    acceptance = True if day < 29 else False
-                    return acceptance, birth_date
-
-                acceptance = True if day < 32 else False
-                return acceptance, birth_date
-
-        return False, None
+        print("Data de aniverário inválida. Por favor tente novamente.\n")
+        checkBirthDate()
     
-    except IndexError: return False, None
-
+    except IndexError:
+        
+        print("Data de aniverário inválida. Por favor tente novamente.\n")
+        checkBirthDate()
+        
 # ------------------------------------------------------------------------------------------------------------
 
 def checkGrade():
 
     try:
 
-        grade = input("Exemplo de nota: 0 <= x <= 10\nInsira a nota: ")
-        acceptance = True if 0 <= float(grade) <= 10 else False
-        return acceptance, grade
+        grade = input("\nExemplo de nota: 0 <= x <= 10\nInsira a nota: ")
+        if 0 <= float(grade) <= 10: return grade
+        print("Nota inválida. Por favor, tente novamente.\n")
+        checkGrade()
 
-    except ValueError: return False, None
+    except ValueError:
+        
+        print("Nota inválida. Por favor, tente novamente.\n")
+        checkGrade()
 
 # ------------------------------------------------------------------------------------------------------------
 
 def checkCourse():
 
-    index = input("Insira o valor correspondente à matéria.\n\n"
-                  "1. Programação C\n"
-                  "2. Programação C++\n"
-                  "3. Programação C#\n"
-                  "4. Programação Python\n"
-                  "5. Programação Java\n"
-                  "6. Programação Haskell\n\n"
-                  "Insira o valor: ")
-
-    if not index.isdigit() or int(index) < 1 or int(index) > 6:
+    try:
         
-        return False, None
+        index = int(input("\nInsira o índcice correspondente à matéria.\n\n"
+                          "1. Programação C\n"
+                          "2. Programação C++\n"
+                          "3. Programação C#\n"
+                          "4. Programação Python\n"
+                          "5. Programação Java\n"
+                          "6. Programação Haskell\n\n"
+                          "Insira o índcice: "))
 
-    map = {"1" : "Programação C",
-           "2" : "Programação C++",
-           "3" : "Programação C#",
-           "4" : "Programção Python",
-           "5" : "Programação Java",
-           "6" : "Programação Haskell"}
+        map = {"1" : "Programação C",
+               "2" : "Programação C++",
+               "3" : "Programação C#",
+               "4" : "Programção Python",
+               "5" : "Programação Java",
+               "6" : "Programação Haskell"}
 
-    return True, map[index]
+        return map[index]
+    
+    except (IndexError, ValueError):
+        
+        print("Índcice inválido. Por favor, tente novamente.\n")
+        checkCourse()
 
 # MAIN PROGRAM ===============================================================================================
 
@@ -414,15 +323,15 @@ while end_application is False:
 
         case "2":
             
-            showList(list, 0)
+            if checkList(list): showList(list, 0)
 
         case "3":
             
-            updateItemOnList(list)
+            if checkList(list): updateItemOnList(list)
 
         case "4":
             
-            removeItemOnList(list)
+            if checkList(list): removeItemOnList(list)
 
         case "5":
             
