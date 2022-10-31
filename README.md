@@ -7,7 +7,7 @@ Este repositório contém o projeto final proposto para a incubação mais dois 
 ## Projeto Final :books:
 
 <p align="justify">
-O projeto final é uma CRUD (Create, Read, Update e Delete) que lida com duas classes: a classe pessoa e a classe aluno. A classe pessoa possui as seguintes propriedades protegidas: nome, número de telefone, data de nascimento, data de cadastro e última data de alteração. Já a classe aluno, por ser uma classe herdada da classe pessoa, além das prorpiedades já mencionadas, possue a propriedade privada nota final do curso. A aplicação consiste numa Array List desses objetos com interação CRUD com o usário, ou seja, o usuário pode criar, atualizar e deletar pessoas e alunos nessa Array List. Como a classe aluno é uma classa herdada da classe pessoa, a ArrayList está configurada para o objeto pessoa. O uso de uma classe abstrata seria desnecessário.
+O projeto final é uma CRUD (Create, Read, Update e Delete) que lida com duas classes: a classe pessoa e a classe aluno. A classe pessoa possui as seguintes propriedades protegidas: nome, número de telefone, data de nascimento, data de cadastro e última data de alteração. Já a classe aluno, por ser uma classe herdada da classe pessoa, além das prorpiedades já mencionadas, possue a propriedade privada nota final do curso. A aplicação consiste numa Array List desses objetos com interação CRUD com o usário, ou seja, o usuário pode criar, atualizar e deletar pessoas e alunos nessa Array List. Como a classe aluno é uma classa herdada da classe pessoa, a ArrayList está configurada para a classe pessoa. O uso de uma classe abstrata seria desnecessário.
 </p>
 
 - Versão 1: versão simples de teste.
@@ -23,7 +23,7 @@ A primeira versão é a versão mais simples do projeto final, uma vez que aceit
 ### Versão 2 :coffee:
 
 <p align="justify">
-A segunda versão é a versão mais complexa do projeto final, uma vez que tem parâmetros para todas as propriedades dos objetos: pessoas e alunos. Por exemplo, a string "abc" não é mais válida para uma data de nascimento. Agora, uma data válida do calendário gregoriano precisa ser inserida no formato dd/mm/aaaa. Além disso, o usuário recebe exemplos de respostas válidas e é forçado a inserir uma resposta válida.
+A segunda versão é a versão mais complexa do projeto final, uma vez que tem parâmetros para todas as propriedades dos objetos: pessoas e alunos. Por exemplo, a string "abc" não é mais válida para uma data de nascimento. Agora, uma data válida do calendário gregoriano precisa ser inserida no formato dd/mm/aaaa. Além disso, o usuário recebe exemplos de respostas válidas e é forçado a inserir uma resposta válida. Os padrôes de cada propriedade são explicados por meio de comentários no código.
 </p>
 
 ### Versão 3 :snake:
