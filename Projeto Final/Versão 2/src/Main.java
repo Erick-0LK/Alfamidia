@@ -378,9 +378,14 @@ public class Main {
 
             if (date.length() == 10 && date.charAt(2) == '/' && date.charAt(5) == '/' && day > 0 && day < 32 && month > 0 && month < 13 && year > 0) {
 
-                if ((month == 4 || month == 6 || month == 9 || month == 11) && day != 31) return date;
-                if (month != 2 && month != 4 && month != 6 && month != 9 && month != 11) return date;
-                if (day < 29 || (year % 4 == 0 && year % 100 != 0 || year % 4 == 0 && year % 100 == 0 && year % 400 == 0 && day < 30)) return date;
+                if (month == 4 || month == 6 || month == 9 || month == 11) {
+                    
+                    if (day != 31) return date;
+
+                }
+
+                else if (month != 2) return date;
+                else if (day < 29 || (year % 4 == 0 && year % 100 != 0 || year % 4 == 0 && year % 100 == 0 && year % 400 == 0 && day < 30)) return date;
 
             }
 
