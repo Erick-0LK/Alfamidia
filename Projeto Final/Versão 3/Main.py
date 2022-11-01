@@ -5,7 +5,8 @@
 
 # IMPORTS ====================================================================================================
 
-import Classes, os, re, msvcrt as m
+import os, re, msvcrt as m
+from Classes import Person, Student, Professor
 
 # FUNCTIONS ==================================================================================================
 
@@ -33,18 +34,18 @@ def addItemToList(list):
     if yesOrNoQuestion(texts[0], 0) is True:
 
         grade = checkGrade()
-        list.append(Classes.Student(name, id, phone_number, birth_date, grade))
+        list.append(Student(name, id, phone_number, birth_date, grade))
 
     else:
 
         if yesOrNoQuestion(texts[1], 0) is True:
 
             course = checkCourse()
-            list.append(Classes.Professor(name, id, phone_number, birth_date, course))
+            list.append(Professor(name, id, phone_number, birth_date, course))
 
         else:
 
-            list.append(Classes.Person(name, id, phone_number, birth_date))
+            list.append(Person(name, id, phone_number, birth_date))
 
 # ------------------------------------------------------------------------------------------------------------
 
@@ -54,12 +55,12 @@ def showList(list, identation):
 
     for object in list:
 
-        if isinstance(object, Classes.Professor):
+        if isinstance(object, Professor):
 
             print(str(index) + ". Professor: " + object.name + "\n")
             print(object.showObject() + "\n")
 
-        elif isinstance(object, Classes.Student):
+        elif isinstance(object, Student):
 
             print(str(index) + ". Aluno: " + object.name + "\n")
             print(object.showObject() + "\n")
@@ -115,13 +116,13 @@ def updateItemOnList(list):
 
                 list[index].birth_date = checkBirthDate()
 
-            if isinstance(object, Classes.Student):
+            if isinstance(object, Student):
 
                 if yesOrNoQuestion(texts[4], 1) is True:
 
                     list[index].grade = checkGrade()
 
-            elif isinstance(object, Classes.Professor):
+            elif isinstance(object, Professor):
 
                 if yesOrNoQuestion(texts[5], 1) is True:
 
@@ -164,9 +165,9 @@ def removeItemOnList(list):
 
 def addExamplesToList(list):
 
-    list.append(Classes.Person("Pessoa Exemplo", "12345678910", "5551123456789", "01/01/2022"))
-    list.append(Classes.Student("Aluno Exemplo", "12345678910", "5551123456789", "01/01/2022", "10"))
-    list.append(Classes.Professor("Professor Exemplo", "12345678910", "5551123456789", "01/01/2022", "Programção C"))
+    list.append(Person("Pessoa Exemplo", "12345678910", "5551123456789", "01/01/2022"))
+    list.append(Student("Aluno Exemplo", "12345678910", "5551123456789", "01/01/2022", "10"))
+    list.append(Professor("Professor Exemplo", "12345678910", "5551123456789", "01/01/2022", "Programção C"))
     
     print("Exemplos foram adicionados. Insira qulquer valor para continuar.\n")
     m.getch()
@@ -216,7 +217,7 @@ def checkName():
         return name
     
     print("Nome inválido. Por favor, tente novamente.\n")
-    checkName()
+    return checkName()
 
 # ------------------------------------------------------------------------------------------------------------
 
@@ -235,12 +236,12 @@ def checkId():
             return id
         
         print("Número de CPF inválido. Por favor, tente novamente.\n")
-        checkId()
+        return checkId()
     
     except IndexError:
         
         print("Número de CPF inválido. Por favor, tente novamente.\n")
-        checkId()
+        return checkId()
 
 # ------------------------------------------------------------------------------------------------------------
 
@@ -254,7 +255,7 @@ def checkPhoneNumber():
         return phone_number
     
     print("Número de telefone inválido. Por favor, tente novamente.\n")
-    checkPhoneNumber()
+    return checkPhoneNumber()
 
 # ------------------------------------------------------------------------------------------------------------
 
@@ -279,12 +280,12 @@ def checkBirthDate():
             if day <= 28 or day <= 29 and test_5: return birth_date
 
         print("Data de aniverário inválida. Por favor tente novamente.\n")
-        checkBirthDate()
+        return checkBirthDate()
     
     except (IndexError, ValueError):
         
         print("Data de aniverário inválida. Por favor tente novamente.\n")
-        checkBirthDate()
+        return checkBirthDate()
         
 # ------------------------------------------------------------------------------------------------------------
 
@@ -296,17 +297,15 @@ def checkGrade():
         
         if 0 <= float(grade) <= 10:
             
-            #print(grade)
-            #input("FUDEU")
             return grade
         
         print("Nota inválida. Por favor, tente novamente.")
-        checkGrade()
+        return checkGrade()
 
     except ValueError:
         
         print("Nota inválida. Por favor, tente novamente.")
-        checkGrade()
+        return checkGrade()
 
 # ------------------------------------------------------------------------------------------------------------
 
@@ -330,14 +329,12 @@ def checkCourse():
     
     try:
         
-        #print(map[index])
-        #input("FUDEU")
         return map[index]
         
     except KeyError:
         
         print("Índice inválido. Por favor, tente novamente.")
-        checkCourse()
+        return  checkCourse()
 
 # MAIN PROGRAM ===============================================================================================
 
