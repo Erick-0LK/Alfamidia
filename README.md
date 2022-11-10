@@ -22,7 +22,7 @@ A primeira versão é a versão mais simples do projeto final, uma vez que aceit
 ### Versão 2
 
 <p align="justify">
-A segunda versão é a versão mais complexa do projeto final, uma vez que tem parâmetros para todas as propriedades dos objetos: pessoas e alunos. Por exemplo, a string "abc" não é mais válida para uma data de nascimento. Agora, uma data válida do calendário gregoriano precisa ser inserida no formato dd/mm/aaaa. Além disso, o usuário recebe exemplos de respostas válidas e é forçado a inserir uma resposta válida. Os padrôes de cada propriedade são explicados por meio de comentários no código.
+A segunda versão é a versão mais complexa do projeto final, uma vez que tem parâmetros para todas as propriedades dos objetos: pessoas e alunos. Por exemplo, a string "abc" não é mais válida para uma data de nascimento. Agora, uma data válida do calendário gregoriano precisa ser inserida no formato dd/mm/aaaa. Além disso, o usuário recebe exemplos de respostas válidas e é forçado a inserir uma resposta válida. Os padrões de cada propriedade são explicados por meio de comentários no código.
 </p>
 
 ### Padrões
