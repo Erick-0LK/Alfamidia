@@ -1,7 +1,7 @@
 # :coffee: +PraTi/Alfamídia: Desenvolvedor Java
 
 <p align="justify">
-Este repositório contém duas versões do projeto final proposto como projeto de incubação do curso Desenvolvedor Java (+PraTi/Alfamídia).
+Este repositório contém duas versões do projeto final proposto como projeto de incubação do curso Desenvolvedor Java (+PraTi/Alfamídia). Além dele, também possuo outros repositórios com projetos feitos em outras linguagens, muitos deles do curso Bacharelado em Ciência da Computação da Universidade Federal do Rio Grande do Sul (UFRGS).
 </p>
 
 ## Projeto Final :books:
@@ -24,3 +24,11 @@ A primeira versão é a versão mais simples do projeto final, uma vez que aceit
 <p align="justify">
 A segunda versão é a versão mais complexa do projeto final, uma vez que tem parâmetros para todas as propriedades dos objetos: pessoas e alunos. Por exemplo, a string "abc" não é mais válida para uma data de nascimento. Agora, uma data válida do calendário gregoriano precisa ser inserida no formato dd/mm/aaaa. Além disso, o usuário recebe exemplos de respostas válidas e é forçado a inserir uma resposta válida. Os padrôes de cada propriedade são explicados por meio de comentários no código.
 </p>
+
+### Padrões da Versão 2
+
+- Nome: não pode ser vazio ou conter caracteres especias
+- Número de telefone: precisa ser um número inteiro de treze dígitios
+- Data: precisa seguir o calendário gregoriano e leva em conta anos bissextos
+- Última data de alteração: armazena automaticamente a data atual do computador
+- Nota final do curso: precisa ser um número real entre zero e dez, ambos inclusos
