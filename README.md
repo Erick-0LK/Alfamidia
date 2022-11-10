@@ -1,7 +1,7 @@
 # :coffee: +PraTi/Alfamídia: Desenvolvedor Java
 
 <p align="justify">
-Este repositório contém duas versões do projeto final proposto como projeto de incubação do curso Desenvolvedor Java (+PraTi/Alfamídia). Além dele, também possuo outros repositórios com projetos feitos em outras linguagens, muitos deles do curso Bacharelado em Ciência da Computação da Universidade Federal do Rio Grande do Sul (UFRGS).
+Este repositório contém duas versões do projeto final proposto como projeto de incubação do curso Desenvolvedor Java (+PraTi/Alfamídia). Além dele, também possuo outros repositórios com projetos feitos em outras linguagens, muitos deles do curso Bacharelado em Ciência da Computação da Universidade Federal do Rio Grande do Sul (UFRGS). Além de Java, também sei Python e LaTeX.
 </p>
 
 ## Projeto Final :books:
